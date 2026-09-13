@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <path d="M 30 90 L 60 30 L 90 90 L 75 90 L 60 50 L 45 90 Z" fill="#8b5cf6"/>
+  <circle cx="105" cy="35" r="6" fill="#f59e0b"/>
+  <text x="130" y="78" font-family="-apple-system, Inter, sans-serif" font-size="36" font-weight="700" fill="#0a0a0f">Apex</text>
+  <text x="130" y="98" font-family="-apple-system, Inter, sans-serif" font-size="11" font-weight="500" fill="#71717a" letter-spacing="2">LABS</text>
+</svg>

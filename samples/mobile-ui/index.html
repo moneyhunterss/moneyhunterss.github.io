@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meditate App — UI mockup</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, Inter, sans-serif; }
+  body { background: #f4f4f5; padding: 40px 20px; }
+  .grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .phone { width: 220px; height: 460px; background: white; border-radius: 24px; border: 1px solid #e4e4e7; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.06); position: relative; }
+  .phone .status { padding: 12px 20px 8px; font-size: 11px; font-weight: 600; color: #71717a; display: flex; justify-content: space-between; }
+  .phone .content { padding: 20px; height: calc(100% - 40px); display: flex; flex-direction: column; }
+  .phone h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; color: #0a0a0f; }
+  .phone .sub { color: #71717a; font-size: 13px; margin-bottom: 24px; }
+  .card { background: #f4f4f5; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .card h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .card p { font-size: 11px; color: #71717a; }
+  .streak { background: linear-gradient(135deg, #f59e0b, #dc2626); color: white; padding: 20px; border-radius: 16px; margin-bottom: 16px; }
+  .streak .num { font-size: 36px; font-weight: 800; line-height: 1; }
+  .streak .label { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .progress { height: 6px; background: rgba(255,255,255,0.3); border-radius: 3px; margin-top: 12px; overflow: hidden; }
+  .progress .bar { height: 100%; background: white; border-radius: 3px; }
+  .btn-primary { background: #0a0a0f; color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 600; width: 100%; margin-top: auto; cursor: pointer; font-size: 13px; }
+  .nav { display: flex; justify-content: space-around; padding: 12px; border-top: 1px solid #e4e4e7; }
+  .nav .item { font-size: 11px; color: #71717a; text-align: center; }
+  .nav .item.active { color: #0a0a0f; font-weight: 700; }
+  .nav .icon { font-size: 18px; margin-bottom: 4px; }
+  .meditation { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f4f4f5; }
+  .meditation:last-child { border-bottom: none; }
+  .meditation .icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .meditation .info { flex: 1; }
+  .meditation .info h4 { font-size: 12px; font-weight: 600; }
+  .meditation .info p { font-size: 10px; color: #71717a; }
+  .meditation .duration { font-size: 11px; color: #71717a; }
+  .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #71717a; margin: 16px 0 8px; }
+  h2 { font-size: 14px; font-weight: 700; margin-bottom: 16px; text-align: center; }
+</style>
+</head>
+<body>
+<h2>Meditate App — Onboarding + Home + Streaks + Library</h2>
+<div class="grid">
+
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>● ● ● ●</span></div>
+    <div class="content">
+      <h1>Welcome</h1>
+      <div class="sub">Build a calmer mind in 10 min/day</div>
+      <div class="card">
+        <h3>🌬️ Breathing</h3>
+        <p>Box breathing for focus</p>
+      </div>
+      <div class="card">
+        <h3>🧘 Body scan</h3>
+        <p>Release physical tension</p>
+      </div>
+      <div class="card">
+        <h3>🌙 Sleep story</h3>
+        <p>Fall asleep faster</p>
+      </div>
+      <button class="btn-primary">Get started →</button>
+    </div>
+  </div>
+
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>● ● ● ●</span></div>
+    <div class="content">
+      <h1>Good morning</h1>
+      <div class="sub">Today's session: 10 min</div>
+      <div class="streak">
+        <div class="num">14</div>
+        <div class="label">Day streak</div>
+        <div class="progress"><div class="bar" style="width: 60%"></div></div>
+      </div>
+      <div class="section-title">Today's pick</div>
+      <div class="meditation">
+        <div class="icon" style="background: #fef3c7">☀️</div>
+        <div class="info"><h4>Morning focus</h4><p>10 min · Beginner</p></div>
+        <div class="duration">▶</div>
+      </div>
+      <button class="btn-primary">Start session</button>
+    </div>
+  </div>
+
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>● ● ● ●</span></div>
+    <div class="content">
+      <h1>Streaks</h1>
+      <div class="sub">Keep the momentum</div>
+      <div class="streak">
+        <div class="num">14 days</div>
+        <div class="label">Current streak</div>
+      </div>
+      <div class="section-title">This week</div>
+      <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 16px;">
+        <div style="aspect-ratio: 1; background: #f59e0b; border-radius: 4px;"></div>
+        <div style="aspect-ratio: 1; background: #f59e0b; border-radius: 4px;"></div>
+        <div style="aspect-ratio: 1; background: #f59e0b; border-radius: 4px;"></div>
+        <div style="aspect-ratio: 1; background: #f59e0b; border-radius: 4px;"></div>
+        <div style="aspect-ratio: 1; background: #f59e0b; border-radius: 4px;"></div>
+        <div style="aspect-ratio: 1; background: #e4e4e7; border-radius: 4px;"></div>
+        <div style="aspect-ratio: 1; background: #e4e4e7; border-radius: 4px;"></div>
+      </div>
+      <div class="section-title">Achievements</div>
+      <div class="meditation">
+        <div class="icon" style="background: #fef3c7">🥇</div>
+        <div class="info"><h4>7-day streak</h4><p>Unlocked 7 days ago</p></div>
+      </div>
+      <div class="meditation">
+        <div class="icon" style="background: #d1fae5">🌱</div>
+        <div class="info"><h4>First session</h4><p>14 days ago</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>● ● ● ●</span></div>
+    <div class="content">
+      <h1>Library</h1>
+      <div class="sub">200+ sessions</div>
+      <div class="section-title">Categories</div>
+      <div class="meditation">
+        <div class="icon" style="background: #dbeafe">🌅</div>
+        <div class="info"><h4>Morning</h4><p>24 sessions</p></div>
+      </div>
+      <div class="meditation">
+        <div class="icon" style="background: #fce7f3">💜</div>
+        <div class="info"><h4>Anxiety relief</h4><p>18 sessions</p></div>
+      </div>
+      <div class="meditation">
+        <div class="icon" style="background: #d1fae5">🌿</div>
+        <div class="info"><h4>Nature sounds</h4><p>32 sessions</p></div>
+      </div>
+      <div class="meditation">
+        <div class="icon" style="background: #fef3c7">🌙</div>
+        <div class="info"><h4>Sleep</h4><p>28 sessions</p></div>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="item"><div class="icon">🏠</div>Home</div>
+      <div class="item active"><div class="icon">📚</div>Library</div>
+      <div class="item"><div class="icon">🔥</div>Streaks</div>
+      <div class="item"><div class="icon">👤</div>Profile</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

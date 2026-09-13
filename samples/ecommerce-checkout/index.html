@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Apex Store — Checkout</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, Inter, sans-serif; }
+  body { background: #f4f4f5; color: #0a0a0f; padding: 40px 20px; }
+  .container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 320px; gap: 40px; }
+  h1 { font-size: 28px; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.5px; }
+  .product { background: white; border: 1px solid #e4e4e7; border-radius: 12px; padding: 24px; margin-bottom: 16px; display: flex; gap: 20px; align-items: center; }
+  .product .img { width: 80px; height: 80px; background: linear-gradient(135deg, #f59e0b, #dc2626); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+  .product .info h3 { font-size: 16px; font-weight: 700; }
+  .product .info p { color: #71717a; font-size: 14px; }
+  .product .price { font-weight: 700; font-size: 18px; }
+  .product .qty { display: flex; align-items: center; gap: 8px; }
+  .product .qty button { width: 28px; height: 28px; border: 1px solid #e4e4e7; background: white; border-radius: 4px; cursor: pointer; font-weight: 700; }
+  .summary { background: white; border: 1px solid #e4e4e7; border-radius: 12px; padding: 24px; height: fit-content; position: sticky; top: 20px; }
+  .summary h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+  .summary .row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; color: #71717a; }
+  .summary .total { border-top: 1px solid #e4e4e7; margin-top: 16px; padding-top: 16px; display: flex; justify-content: space-between; font-weight: 700; font-size: 18px; }
+  .btn { background: #0a0a0f; color: white; padding: 14px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 16px; transition: background .15s; }
+  .btn:hover { background: #27272a; }
+  .checkout-form { background: white; border: 1px solid #e4e4e7; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .checkout-form h2 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+  .field { margin-bottom: 12px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; color: #71717a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .field input { width: 100%; padding: 10px 12px; border: 1px solid #e4e4e7; border-radius: 6px; font-size: 14px; }
+  .field input:focus { outline: none; border-color: #f59e0b; }
+  .alert { background: #fef3c7; border: 1px solid #fde68a; padding: 12px 16px; border-radius: 8px; font-size: 13px; color: #92400e; margin-bottom: 16px; }
+  .success { display: none; background: #d1fae5; border: 1px solid #6ee7b7; padding: 24px; border-radius: 12px; color: #065f46; text-align: center; }
+  .success.show { display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div>
+    <h1>Checkout</h1>
+    <div class="alert">⚡ Demo mode — no real payment will be processed. Use card 4242 4242 4242 4242, any future date, any CVC.</div>
+    <div id="products"></div>
+    <div class="checkout-form">
+      <h2>Contact + Shipping</h2>
+      <div class="field"><label>Email</label><input type="email" placeholder="you@example.com" value="demo@apex.store"></div>
+      <div class="field"><label>Full name</label><input type="text" value="Alex Morgan"></div>
+      <div class="field"><label>Address</label><input type="text" value="123 Demo Street"></div>
+      <div class="field"><label>City</label><input type="text" value="San Francisco"></div>
+      <div class="field"><label>ZIP</label><input type="text" value="94102"></div>
+    </div>
+    <div class="checkout-form">
+      <h2>Payment</h2>
+      <div class="field"><label>Card number</label><input type="text" placeholder="4242 4242 4242 4242" value="4242 4242 4242 4242" id="card"></div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="field"><label>Expiry</label><input type="text" placeholder="12/27" value="12/27"></div>
+        <div class="field"><label>CVC</label><input type="text" placeholder="123" value="123"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="summary">
+      <h2>Order summary</h2>
+      <div class="row"><span>Subtotal</span><span id="subtotal">$0</span></div>
+      <div class="row"><span>Shipping</span><span>Free</span></div>
+      <div class="row"><span>Tax (8.5%)</span><span id="tax">$0</span></div>
+      <div class="total"><span>Total</span><span id="total">$0</span></div>
+      <button class="btn" onclick="checkout()">Place order →</button>
+    </div>
+  </div>
+</div>
+<div class="success" id="success">
+  ✅ Order placed!<br><br>
+  Confirmation email sent to demo@apex.store.<br>
+  Order #<span id="order-id"></span>
+</div>
+
+<script>
+const PRODUCTS = [
+  { id: 1, name: "Apex Hoodie", price: 79, emoji: "👕", qty: 1 },
+  { id: 2, name: "Meridian Mug", price: 24, emoji: "☕", qty: 2 },
+  { id: 3, name: "Verdant Sticker Pack", price: 12, emoji: "✨", qty: 3 },
+];
+
+function render() {
+  const el = document.getElementById('products');
+  el.innerHTML = PRODUCTS.map((p, i) => `
+    <div class="product">
+      <div class="img">${p.emoji}</div>
+      <div class="info" style="flex:1">
+        <h3>${p.name}</h3>
+        <p>$${p.price} each</p>
+      </div>
+      <div class="qty">
+        <button onclick="updateQty(${i}, -1)">-</button>
+        <span style="min-width: 24px; text-align: center; font-weight: 600;">${p.qty}</span>
+        <button onclick="updateQty(${i}, 1)">+</button>
+      </div>
+      <div class="price">$${p.price * p.qty}</div>
+    </div>
+  `).join('');
+  const subtotal = PRODUCTS.reduce((sum, p) => sum + p.price * p.qty, 0);
+  const tax = Math.round(subtotal * 0.085 * 100) / 100;
+  document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+  document.getElementById('tax').textContent = '$' + tax.toFixed(2);
+  document.getElementById('total').textContent = '$' + (subtotal + tax).toFixed(2);
+}
+function updateQty(i, delta) {
+  PRODUCTS[i].qty = Math.max(0, PRODUCTS[i].qty + delta);
+  render();
+}
+function checkout() {
+  // Validate card (demo only)
+  const card = document.getElementById('card').value.replace(/\s/g, '');
+  if (card.length !== 16 || !/^\d+$/.test(card)) {
+    alert('Please enter a valid 16-digit card number (demo: 4242 4242 4242 4242)');
+    return;
+  }
+  // Simulate payment success
+  document.querySelector('.container').style.display = 'none';
+  const orderId = 'APX-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+  document.getElementById('order-id').textContent = orderId;
+  document.getElementById('success').classList.add('show');
+}
+render();
+</script>
+</body>
+</html>
