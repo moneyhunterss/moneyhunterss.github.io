@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IGETTHINGSDONE.</title>
-<meta name="description" content="Anonymous freelancer. I build stuff. Real code, real demos, real GitHub. 24h proof-of-concept, free. DM me.">
+<meta name="description" content="Anonymous developer. I build hardcore tools — port scanners, encryption, Discord bots, scrapers, CLI tools. Real code, no fluff. 24h proof-of-concept, free.">
 <style>
   :root {
     --bg: #000;
@@ -25,8 +25,6 @@
     overflow-x: hidden;
   }
   body { font-size: 16px; }
-
-  /* GRID OVERLAY (subtle background grid) */
   body::before {
     content: '';
     position: fixed; inset: 0; pointer-events: none; z-index: 0;
@@ -36,236 +34,90 @@
     background-size: 80px 80px;
     opacity: 0.4;
   }
-
-  /* TOP BAR */
   .topbar {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: var(--bg); border-bottom: 1px solid var(--line);
     padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;
   }
-  .brand {
-    font-weight: 800; letter-spacing: -1px; font-size: 14px;
-  }
+  .brand { font-weight: 800; letter-spacing: -1px; font-size: 14px; }
   .brand .dot { color: var(--accent); }
   .topbar nav { display: flex; gap: 24px; }
-  .topbar a {
-    color: var(--muted); font-size: 13px; text-decoration: none;
-    transition: color .15s;
-  }
+  .topbar a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color .15s; }
   .topbar a:hover { color: var(--accent); }
-  .topbar .status {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 12px; color: var(--muted);
-  }
-  .status .pulse {
-    width: 8px; height: 8px; border-radius: 50%; background: #10b981;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  .topbar .status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+  .status .pulse { width: 8px; height: 8px; border-radius: 50%; background: #10b981; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% {opacity:1;} 50% {opacity:0.4;} }
   @media (max-width: 768px) { .topbar nav, .topbar .status { display: none; } }
 
   .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-
-  /* HERO */
-  .hero {
-    padding: 160px 0 80px;
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .hero .label {
-    color: var(--muted); font-size: 13px; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 24px;
-  }
-  .hero h1 {
-    font-size: clamp(48px, 12vw, 180px);
-    font-weight: 900; line-height: 0.9; letter-spacing: -4px;
-    margin-bottom: 32px;
-  }
+  .hero { padding: 160px 0 80px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+  .hero .label { color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(48px, 12vw, 180px); font-weight: 900; line-height: 0.9; letter-spacing: -4px; margin-bottom: 32px; }
   .hero h1 .dot { color: var(--accent); }
-  .hero .sub {
-    font-size: clamp(16px, 2vw, 22px);
-    color: var(--muted); max-width: 600px; margin-bottom: 48px;
-    font-family: -apple-system, Inter, sans-serif;
-  }
+  .hero .sub { font-size: clamp(16px, 2vw, 22px); color: var(--muted); max-width: 700px; margin-bottom: 48px; font-family: -apple-system, Inter, sans-serif; }
   .hero .sub strong { color: var(--text); font-weight: 600; }
-  .hero .cta {
-    display: inline-flex; gap: 16px; flex-wrap: wrap;
-  }
-  .btn {
-    padding: 14px 24px; border: 1px solid var(--text); color: var(--text);
-    text-decoration: none; font-weight: 700; font-size: 14px;
-    letter-spacing: 0.5px; transition: all .15s;
-    background: var(--bg);
-  }
+  .hero .cta { display: inline-flex; gap: 16px; flex-wrap: wrap; }
+  .btn { padding: 14px 24px; border: 1px solid var(--text); color: var(--text); text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.5px; transition: all .15s; background: var(--bg); }
   .btn:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
   .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
   .btn.primary:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-  /* TERMINAL */
-  .terminal {
-    margin: 100px 0; padding: 0; border: 1px solid var(--line);
-    background: #050505; border-radius: 0; overflow: hidden;
-  }
-  .terminal .head {
-    background: var(--dim); padding: 8px 16px; display: flex;
-    align-items: center; gap: 8px; border-bottom: 1px solid var(--line);
-  }
+  .terminal { margin: 100px 0; border: 1px solid var(--line); background: #050505; overflow: hidden; }
+  .terminal .head { background: var(--dim); padding: 8px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--line); }
   .terminal .dot-r { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
   .terminal .dot-y { width: 10px; height: 10px; border-radius: 50%; background: #febc2e; }
   .terminal .dot-g { width: 10px; height: 10px; border-radius: 50%; background: #28c840; }
-  .terminal .title {
-    color: var(--muted); font-size: 12px; margin-left: 8px;
-  }
-  .terminal .body {
-    padding: 24px; font-size: 14px; line-height: 1.7; min-height: 320px;
-    font-family: 'IBM Plex Mono', monospace;
-  }
+  .terminal .title { color: var(--muted); font-size: 12px; margin-left: 8px; }
+  .terminal .body { padding: 24px; font-size: 14px; line-height: 1.7; min-height: 320px; font-family: 'IBM Plex Mono', monospace; }
   .terminal .line { white-space: pre-wrap; word-break: break-word; }
   .terminal .prompt { color: var(--accent); }
   .terminal .out { color: var(--text); padding-left: 16px; }
-  .terminal .dim { color: var(--muted); }
-  .terminal .hi { color: var(--accent); }
-  .cursor {
-    display: inline-block; width: 8px; height: 16px;
-    background: var(--accent); vertical-align: text-bottom;
-    animation: blink 1s infinite;
-  }
-  @keyframes blink {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
+  .cursor { display: inline-block; width: 8px; height: 16px; background: var(--accent); vertical-align: text-bottom; animation: blink 1s infinite; }
+  @keyframes blink { 0%,49% {opacity:1;} 50%,100% {opacity:0;} }
 
-  /* WORK SECTION */
   .section { padding: 80px 0; border-top: 1px solid var(--line); }
-  .section .label {
-    color: var(--muted); font-size: 12px; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 8px;
-  }
-  .section h2 {
-    font-size: clamp(36px, 6vw, 80px); font-weight: 900;
-    letter-spacing: -2px; margin-bottom: 48px; line-height: 1;
-  }
+  .section .label { color: var(--muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .section h2 { font-size: clamp(36px, 6vw, 80px); font-weight: 900; letter-spacing: -2px; margin-bottom: 48px; line-height: 1; }
   .section h2 .accent { color: var(--accent); }
 
-  /* PROJECT LIST (brutalist) */
   .work-list { list-style: none; }
-  .work-item {
-    border-top: 1px solid var(--line);
-    padding: 32px 0; display: grid;
-    grid-template-columns: 60px 1fr 200px 100px;
-    gap: 24px; align-items: center;
-    transition: background .15s;
-  }
+  .work-item { border-top: 1px solid var(--line); padding: 32px 0; display: grid; grid-template-columns: 60px 1fr 200px 100px; gap: 24px; align-items: center; transition: background .15s; }
   .work-item:last-child { border-bottom: 1px solid var(--line); }
   .work-item:hover { background: var(--dim); }
-  .work-item .num {
-    color: var(--muted); font-size: 13px; font-weight: 700;
-  }
-  .work-item .info h3 {
-    font-size: clamp(20px, 3vw, 32px); font-weight: 800;
-    letter-spacing: -1px; margin-bottom: 4px;
-  }
-  .work-item .info h3 a {
-    color: var(--text); text-decoration: none;
-  }
+  .work-item .num { color: var(--muted); font-size: 13px; font-weight: 700; }
+  .work-item .info h3 { font-size: clamp(20px, 3vw, 32px); font-weight: 800; letter-spacing: -1px; margin-bottom: 4px; }
+  .work-item .info h3 a { color: var(--text); text-decoration: none; }
   .work-item:hover .info h3 a { color: var(--accent); }
-  .work-item .info .desc {
-    color: var(--muted); font-size: 14px;
-    font-family: -apple-system, Inter, sans-serif;
-  }
-  .work-item .stack {
-    display: flex; gap: 6px; flex-wrap: wrap;
-    font-size: 12px; color: var(--muted);
-  }
-  .work-item .stack span {
-    border: 1px solid var(--line); padding: 3px 8px;
-  }
-  .work-item .live {
-    text-align: right; font-size: 13px;
-  }
-  .work-item .live a {
-    color: var(--accent); text-decoration: none; font-weight: 700;
-    border-bottom: 1px solid var(--accent); padding-bottom: 2px;
-  }
-  @media (max-width: 768px) {
-    .work-item { grid-template-columns: 40px 1fr; }
-    .work-item .stack, .work-item .live { grid-column: 2; text-align: left; }
-  }
+  .work-item .info .desc { color: var(--muted); font-size: 14px; font-family: -apple-system, Inter, sans-serif; }
+  .work-item .stack { display: flex; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+  .work-item .stack span { border: 1px solid var(--line); padding: 3px 8px; }
+  .work-item .live { text-align: right; font-size: 13px; }
+  .work-item .live a { color: var(--accent); text-decoration: none; font-weight: 700; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+  @media (max-width: 768px) { .work-item { grid-template-columns: 40px 1fr; } .work-item .stack, .work-item .live { grid-column: 2; text-align: left; } }
 
-  /* WHAT I BUILD (simple list) */
-  .can-build {
-    list-style: none; max-width: 800px;
-  }
-  .can-build li {
-    padding: 16px 0; border-bottom: 1px solid var(--line);
-    display: flex; align-items: baseline; gap: 16px;
-    font-size: clamp(18px, 2.5vw, 24px); font-weight: 700;
-    letter-spacing: -0.5px;
-  }
+  .can-build { list-style: none; max-width: 900px; }
+  .can-build li { padding: 16px 0; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 16px; font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; letter-spacing: -0.5px; }
   .can-build li:last-child { border-bottom: none; }
-  .can-build li .x {
-    color: var(--accent); font-size: 20px; flex-shrink: 0;
-  }
-  .can-build li .tags {
-    margin-left: auto; color: var(--muted); font-size: 13px;
-    font-family: -apple-system, Inter, sans-serif; font-weight: 400;
-  }
+  .can-build li .x { color: var(--accent); font-size: 20px; flex-shrink: 0; }
+  .can-build li .tags { margin-left: auto; color: var(--muted); font-size: 13px; font-family: -apple-system, Inter, sans-serif; font-weight: 400; }
 
-  /* PITCH (single block) */
-  .pitch {
-    padding: 120px 0; text-align: center; border-top: 1px solid var(--line);
-    background: var(--accent); color: var(--bg);
-  }
-  .pitch h2 {
-    font-size: clamp(36px, 6vw, 72px); font-weight: 900;
-    letter-spacing: -2px; margin-bottom: 24px; line-height: 1;
-  }
-  .pitch p {
-    font-size: clamp(16px, 2vw, 20px); max-width: 600px;
-    margin: 0 auto 40px; font-family: -apple-system, Inter, sans-serif;
-  }
-  .pitch .btn {
-    background: var(--bg); color: var(--accent);
-    border-color: var(--bg);
-  }
+  .pitch { padding: 120px 0; text-align: center; border-top: 1px solid var(--line); background: var(--accent); color: var(--bg); }
+  .pitch h2 { font-size: clamp(36px, 6vw, 72px); font-weight: 900; letter-spacing: -2px; margin-bottom: 24px; line-height: 1; }
+  .pitch p { font-size: clamp(16px, 2vw, 20px); max-width: 600px; margin: 0 auto 40px; font-family: -apple-system, Inter, sans-serif; }
+  .pitch .btn { background: var(--bg); color: var(--accent); border-color: var(--bg); }
   .pitch .btn:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
 
-  /* CONTACT */
-  .contact-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-    background: var(--line); border: 1px solid var(--line);
-    margin-top: 48px;
-  }
-  .contact-card {
-    background: var(--bg); padding: 32px;
-    text-align: center; transition: background .15s;
-  }
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 48px; }
+  .contact-card { background: var(--bg); padding: 32px; text-align: center; transition: background .15s; }
   .contact-card:hover { background: var(--dim); }
   .contact-card .icon { font-size: 32px; margin-bottom: 12px; }
-  .contact-card .label {
-    color: var(--muted); font-size: 11px; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 8px;
-  }
-  .contact-card .value {
-    font-size: 16px; font-weight: 700; word-break: break-all;
-  }
+  .contact-card .label { color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .contact-card .value { font-size: 16px; font-weight: 700; word-break: break-all; }
   .contact-card .value a { color: var(--accent); text-decoration: none; }
-  @media (max-width: 768px) {
-    .contact-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
 
-  /* FOOTER */
-  footer {
-    padding: 32px 0; border-top: 1px solid var(--line);
-    color: var(--muted); font-size: 12px; text-align: center;
-  }
-  footer .ascii {
-    font-family: monospace; white-space: pre; line-height: 1.1;
-    margin-bottom: 16px; color: var(--line);
-  }
+  footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; text-align: center; }
+  footer .ascii { font-family: monospace; white-space: pre; line-height: 1.1; margin-bottom: 16px; color: var(--line); }
 </style>
 </head>
 <body>
@@ -284,10 +136,10 @@
 <div class="container">
 
   <section class="hero">
-    <div class="label">// anonymous freelance developer</div>
+    <div class="label">// anonymous developer — hardcore tools</div>
     <h1>IGET<br>THINGS<br>DONE<span class="dot">.</span></h1>
     <p class="sub">
-      I build <strong>web apps, bots, scrapers, brand systems, mobile UI</strong>.
+      I build <strong>security tools, scrapers, bots, CLI utilities, encryption</strong>.
       I work <strong>fast</strong> (24h prototypes), <strong>quietly</strong> (no credentials shared),
       and <strong>for free first</strong> — you see my code before any invoice.
     </p>
@@ -306,32 +158,62 @@
   </div>
 
   <section class="section" id="work">
-    <div class="label">// 06 selected projects</div>
+    <div class="label">// 08 selected projects</div>
     <h2>WORK<span class="accent">.</span></h2>
     <ul class="work-list">
 
       <li class="work-item">
         <div class="num">01</div>
         <div class="info">
-          <h3><a href="https://github.com/moneyhunterss/leadfinder" target="_blank">LeadFinder</a></h3>
-          <div class="desc">Anonymous gig scanner. 54 Reddit subs + HN + Bitcointalk + 4chan + 10 RSS feeds. Strict regex + LLM scoring, Telegram pings, SQLite pipeline, 18-command bot. Live on GitHub Actions cron.</div>
+          <h3><a href="./samples/port-scanner/" target="_blank">Port Scanner</a></h3>
+          <div class="desc">Concurrent TCP port scanner. 100 workers, service identification, flexible port ranges. Stdlib only — zero deps.</div>
         </div>
-        <div class="stack"><span>Python</span><span>SQLite</span><span>Telegram</span><span>Actions</span></div>
-        <div class="live"><a href="https://github.com/moneyhunterss/leadfinder" target="_blank">code →</a></div>
+        <div class="stack"><span>Python</span><span>socket</span><span>concurrent.futures</span></div>
+        <div class="live"><a href="./samples/port-scanner/" target="_blank">code →</a></div>
       </li>
 
       <li class="work-item">
         <div class="num">02</div>
         <div class="info">
-          <h3><a href="./samples/reddit-scraper/" target="_blank">Reddit Scraper</a></h3>
-          <div class="desc">Production-ready scraper. Any subreddit → CSV/JSON/Markdown. Rate-limit handling, concurrent workers, comment extraction. Stdlib only — zero deps.</div>
+          <h3><a href="./samples/encrypt-tool/" target="_blank">AES-256 File Encryption</a></h3>
+          <div class="desc">AES-256-GCM authenticated encryption. PBKDF2 key derivation (600k iterations), random salt + nonce per file. Tamper detection built in.</div>
         </div>
-        <div class="stack"><span>Python</span><span>stdlib</span><span>concurrent.futures</span></div>
-        <div class="live"><a href="./samples/reddit-scraper/" target="_blank">code →</a></div>
+        <div class="stack"><span>Python</span><span>cryptography</span><span>PBKDF2</span></div>
+        <div class="live"><a href="./samples/encrypt-tool/" target="_blank">code →</a></div>
       </li>
 
       <li class="work-item">
         <div class="num">03</div>
+        <div class="info">
+          <h3><a href="./samples/discord-bot/" target="_blank">Discord Bot</a></h3>
+          <div class="desc">Production bot skeleton. Slash commands, role-based permissions, member management, embeds, error handling. discord.py 2.x.</div>
+        </div>
+        <div class="stack"><span>Python</span><span>discord.py</span><span>async</span></div>
+        <div class="live"><a href="./samples/discord-bot/" target="_blank">code →</a></div>
+      </li>
+
+      <li class="work-item">
+        <div class="num">04</div>
+        <div class="info">
+          <h3><a href="./samples/cli-tool/" target="_blank">File Watcher CLI</a></h3>
+          <div class="desc">watchdir — watches a directory for new files matching a regex, runs a command. Like inotify + cron. Auto-process CSVs, auto-resize images, auto-deploy.</div>
+        </div>
+        <div class="stack"><span>Python</span><span>stdlib</span><span>subprocess</span></div>
+        <div class="live"><a href="./samples/cli-tool/" target="_blank">code →</a></div>
+      </li>
+
+      <li class="work-item">
+        <div class="num">05</div>
+        <div class="info">
+          <h3><a href="./samples/reddit-scraper/" target="_blank">Web Scraper Framework</a></h3>
+          <div class="desc">Generic web scraper — concurrent workers, rate-limit handling, pagination, export to CSV/JSON/Markdown. Built for any site, not just one.</div>
+        </div>
+        <div class="stack"><span>Python</span><span>requests</span><span>concurrent</span></div>
+        <div class="live"><a href="./samples/reddit-scraper/" target="_blank">code →</a></div>
+      </li>
+
+      <li class="work-item">
+        <div class="num">06</div>
         <div class="info">
           <h3><a href="./samples/ecommerce-checkout/" target="_blank">E-commerce Checkout</a></h3>
           <div class="desc">Working vanilla JS checkout. Cart, tax calc, payment form validation, order confirmation. 3KB total. Try it — use card 4242 4242 4242 4242.</div>
@@ -341,29 +223,19 @@
       </li>
 
       <li class="work-item">
-        <div class="num">04</div>
+        <div class="num">07</div>
         <div class="info">
-          <h3><a href="./samples/brand-system/" target="_blank">Brand Systems</a></h3>
-          <div class="desc">Three SVG brand identity concepts (Meridian, Verdant, Apex). Logo, palette, typography. Figma-native, ships with SVG source + brand guide.</div>
+          <h3><a href="./samples/brand-system/" target="_blank">Brand Identity Systems</a></h3>
+          <div class="desc">Three SVG brand concepts (Meridian, Verdant, Apex). Logo, palette, typography. Figma-native, ships with SVG source + brand guide.</div>
         </div>
         <div class="stack"><span>Figma</span><span>SVG</span><span>Illustrator</span></div>
         <div class="live"><a href="./samples/brand-system/" target="_blank">view →</a></div>
       </li>
 
       <li class="work-item">
-        <div class="num">05</div>
+        <div class="num">08</div>
         <div class="info">
-          <h3><a href="https://github.com/moneyhunterss/leadfinder/blob/main/bot.py" target="_blank">Telegram Bot</a></h3>
-          <div class="desc">18-command long-polling bot. Pipeline tracking, earnings stats, niche + tier filters, HTML messages, crash alerting. Production-ready.</div>
-        </div>
-        <div class="stack"><span>Python</span><span>SQLite</span><span>Telegram API</span></div>
-        <div class="live"><a href="https://github.com/moneyhunterss/leadfinder/blob/main/bot.py" target="_blank">code →</a></div>
-      </li>
-
-      <li class="work-item">
-        <div class="num">06</div>
-        <div class="info">
-          <h3><a href="./samples/mobile-ui/" target="_blank">Mobile UI</a></h3>
+          <h3><a href="./samples/mobile-ui/" target="_blank">Mobile UI Mockup</a></h3>
           <div class="desc">Meditation app — 4-screen UI mockup. Onboarding, home, streaks, library. HTML mockup that translates directly to React Native.</div>
         </div>
         <div class="stack"><span>HTML</span><span>CSS</span><span>React Native</span></div>
@@ -377,14 +249,18 @@
     <div class="label">// what i can build for you</div>
     <h2>CAN<span class="accent">BUILD.</span></h2>
     <ul class="can-build">
+      <li><span class="x">×</span> Security tools <span class="tags">port scanners, network recon, vulnerability checks</span></li>
+      <li><span class="x">×</span> Cryptography <span class="tags">AES-256, RSA, hashing, key derivation, signing</span></li>
+      <li><span class="x">×</span> Scrapers & crawlers <span class="tags">Python, Selenium, Playwright, concurrent</span></li>
+      <li><span class="x">×</span> Bots <span class="tags">Discord, Telegram, Slack, IRC, Mattermost</span></li>
+      <li><span class="x">×</span> CLI tools <span class="tags">file watchers, batch processors, automation scripts</span></li>
       <li><span class="x">×</span> Web apps <span class="tags">Next.js, React, Vue, Node, Postgres</span></li>
-      <li><span class="x">×</span> Bots <span class="tags">Telegram, Discord, Slack, IRC</span></li>
-      <li><span class="x">×</span> Scrapers <span class="tags">Python, Selenium, Playwright</span></li>
-      <li><span class="x">×</span> Brand identity <span class="tags">Logo, palette, typography, brand guide</span></li>
-      <li><span class="x">×</span> LLM integration <span class="tags">OpenAI, RAG, vector search, custom GPTs</span></li>
+      <li><span class="x">×</span> Browser extensions <span class="tags">Chrome MV3, Firefox, Tampermonkey</span></li>
+      <li><span class="x">×</span> APIs & integrations <span class="tags">REST, GraphQL, webhooks, OAuth, Stripe</span></li>
+      <li><span class="x">×</span> Automation pipelines <span class="tags">cron, GitHub Actions, Docker, n8n</span></li>
+      <li><span class="x">×</span> Brand identity <span class="tags">logos, palettes, typography, brand guides</span></li>
       <li><span class="x">×</span> Mobile apps <span class="tags">React Native + Expo, iOS + Android</span></li>
-      <li><span class="x">×</span> Web3 <span class="tags">Solidity, Web3.js, NFT mint sites, DeFi</span></li>
-      <li><span class="x">×</span> Automation <span class="tags">cron, GitHub Actions, n8n, Zapier</span></li>
+      <li><span class="x">×</span> Web3 <span class="tags">Solidity, Web3.js, ethers.js, NFT mint sites</span></li>
     </ul>
   </section>
 
@@ -434,18 +310,19 @@
 </footer>
 
 <script>
-// TERMINAL ANIMATION
 const term = document.getElementById('term-body');
 const lines = [
   {type: 'cmd', text: 'whoami'},
-  {type: 'out', text: 'anonymous freelance developer. ships fast.'},
+  {type: 'out', text: 'anonymous developer. ships fast. asks for spec, not credentials.'},
   {type: 'cmd', text: 'ls work/'},
-  {type: 'out', text: 'leadfinder/         (live on GitHub Actions, 54 Reddit subs scanned hourly)'},
-  {type: 'out', text: 'reddit-scraper/     (production Python, stdlib only)'},
-  {type: 'out', text: 'ecommerce-checkout/ (working vanilla JS, 3KB total)'},
-  {type: 'out', text: 'brand-system/      (3 SVG logos, Figma-native)'},
-  {type: 'out', text: 'telegram-bot/      (18 commands, SQLite pipeline)'},
-  {type: 'out', text: 'mobile-ui/         (4-screen meditation app mockup)'},
+  {type: 'out', text: 'port-scanner/       (concurrent TCP scanner, 100 workers)'},
+  {type: 'out', text: 'encrypt-tool/       (AES-256-GCM, PBKDF2 600k iterations)'},
+  {type: 'out', text: 'discord-bot/        (slash commands, role management)'},
+  {type: 'out', text: 'cli-tool/           (file watcher + regex triggers)'},
+  {type: 'out', text: 'web-scraper/        (concurrent, rate-limit handling)'},
+  {type: 'out', text: 'ecommerce-checkout/ (vanilla JS, 3KB total)'},
+  {type: 'out', text: 'brand-systems/     (3 SVG logos, Figma-native)'},
+  {type: 'out', text: 'mobile-ui/         (4-screen app mockup)'},
   {type: 'cmd', text: 'cat pitch.txt'},
   {type: 'out', text: '"Send me your spec. I\'ll ship a 24h proof-of-concept. Free."'},
   {type: 'out', text: '"No invoice until you\'ve seen the code. Walk away any time."'},
@@ -460,19 +337,14 @@ let charI = 0;
 let currentEl = null;
 
 function typeNext() {
-  if (i >= lines.length) {
-    // Done — leave the cursor blinking on the last line
-    return;
-  }
+  if (i >= lines.length) return;
   const line = lines[i];
   if (charI === 0) {
-    // Create the line element
     currentEl = document.createElement('div');
     currentEl.className = 'line';
     if (line.type === 'cmd') {
       currentEl.innerHTML = '<span class="prompt">$</span> ';
       term.appendChild(currentEl);
-      // Remove cursor from previous line
       const prev = term.querySelectorAll('.cursor');
       prev.forEach(c => c.remove());
     } else {
@@ -481,34 +353,26 @@ function typeNext() {
     }
   }
   if (line.type === 'cmd') {
-    // Type the command char by char
     if (charI < line.text.length) {
       currentEl.innerHTML = '<span class="prompt">$</span> ' + line.text.slice(0, charI + 1);
       charI++;
       setTimeout(typeNext, 50 + Math.random() * 60);
     } else {
-      // Command done — add cursor, then wait, then output
       currentEl.innerHTML = '<span class="prompt">$</span> ' + line.text + '<span class="cursor"></span>';
       setTimeout(() => {
         const c = currentEl.querySelector('.cursor');
         if (c) c.remove();
-        i++;
-        charI = 0;
-        currentEl = null;
+        i++; charI = 0; currentEl = null;
         setTimeout(typeNext, 300);
       }, 400);
     }
   } else {
-    // Output line — type all at once (faster)
     currentEl.textContent = line.text;
-    i++;
-    charI = 0;
-    currentEl = null;
+    i++; charI = 0; currentEl = null;
     setTimeout(typeNext, 80 + Math.random() * 100);
   }
 }
 
-// Start terminal animation when it scrolls into view
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -519,7 +383,6 @@ const observer = new IntersectionObserver((entries) => {
 }, {threshold: 0.3});
 observer.observe(document.getElementById('terminal'));
 
-// Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
     e.preventDefault();

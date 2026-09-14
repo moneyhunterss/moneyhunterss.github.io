@@ -1,80 +1,85 @@
-# Reddit Data Scraper
+# Web Scraper Framework
 
-A production-ready Python script that scrapes any subreddit, extracts posts + comments,
-and exports to CSV/JSON. Handles rate limits, pagination, and concurrent requests.
+Production-ready concurrent scraper. Scrapes any paginated web endpoint,
+extracts structured data, exports to CSV/JSON/Markdown. Built for any site,
+not just one.
 
 ## Features
 
-- Scrape any subreddit by name (e.g. `r/forhire`)
-- Filter by post type (Hiring / For Hire / Task / All)
-- Extract: title, URL, author, score, num_comments, body text, created date
-- Optional: scrape top N comments per post
+- Concurrent scraping (3 workers by default, configurable)
+- Rate-limit handling with exponential backoff
+- Pagination support (cursor, offset, or page-number based)
 - Export to CSV, JSON, or Markdown
-- Handles Reddit rate limits (429) with exponential backoff
-- Concurrent requests (3 workers) for speed
-- No Reddit account required — uses public RSS / .json endpoints
+- Comment / sub-page extraction
+- Filter by post type (hiring, for-hire, task, all)
 
 ## Quick start
 
 ```bash
 pip install -r requirements.txt
 
-# Scrape r/forhire, top 50 posts, no comments
-python scrape.py --sub forhire --limit 50 --output forhire.csv
+# Scrape a paginated API endpoint, top 50 results
+python scrape.py --url "https://api.example.com/posts" --limit 50 --output results.csv
 
-# Scrape r/slavelabour, top 25 posts, top 5 comments each
-python scrape.py --sub slavelabour --limit 25 --comments 5 --output slavelabour.json
+# Scrape + extract child pages (top 5 each)
+python scrape.py --url "https://example.com/list" --children 5 --output results.json
 
-# Filter only [Hiring] posts
-python scrape.py --sub Jobs4Bitcoins --filter hiring --output jobs4b.json
+# Filter by content type
+python scrape.py --url "https://example.com/list" --filter hiring --output hiring.json
 ```
 
 ## Use cases
 
-- Market research (find what gigs are common in your niche)
-- Lead generation (scrape hiring posts, contact via DM)
+- Market research (find common patterns across 100s of listings)
+- Lead generation (scrape job postings, contact via email/DM)
 - Content analysis (find trending topics, sentiment)
-- Competitor research (see what other freelancers offer)
+- Competitor research (price monitoring, feature comparison)
+- News aggregation (collect headlines from N sources)
+- Academic research (collect papers, citation networks)
 
 ## Output format
 
 ### CSV
 ```
 title,url,author,score,num_comments,created_utc,body
-"[Hiring] Shopify UX Designer","https://reddit.com/r/forhire/comments/...","user123",45,12,1700000000,"Looking for..."
+"Shopify UX Designer role","https://example.com/post/123","user",45,12,1700000000,"Looking for..."
 ```
 
 ### JSON
 ```json
 [
   {
-    "title": "[Hiring] Shopify UX Designer",
-    "url": "https://reddit.com/r/forhire/comments/...",
-    "author": "user123",
+    "title": "Shopify UX Designer role",
+    "url": "https://example.com/post/123",
+    "author": "user",
     "score": 45,
     "num_comments": 12,
     "created_utc": 1700000000,
     "body": "Looking for...",
-    "comments": [
-      {"author": "user456", "body": "I can do this...", "score": 5}
+    "children": [
+      {"author": "user2", "body": "I can do this...", "score": 5}
     ]
   }
 ]
 ```
 
-## Tech stack
+## Tech
 
 - Python 3.10+
-- `requests` — HTTP
-- `concurrent.futures` — async workers
+- `concurrent.futures` — parallel workers
+- `urllib.request` — HTTP (no external deps)
 - Standard library only otherwise
 
-## Why this exists
+## Production-ready upgrades
 
-I built this for a client who needed to monitor 50+ Reddit subs daily for paid gig posts.
-The full production version includes LLM scoring, Telegram notifications, and a pipeline
-tracker. This is the simplified open-source release.
+For real production use, I'd add:
+- Proxy rotation (residential proxies for anti-bot evasion)
+- Headless browser fallback (Selenium/Playwright for JS-rendered sites)
+- Database sink (Postgres, S3, BigQuery)
+- Scheduling (cron, GitHub Actions, Airflow)
+- Monitoring (alert on 0 results / high error rate)
+- Anti-detection (random User-Agents, request jitter)
 
 ## License
 
-MIT — use it for anything, including commercial.
+MIT — use for any legal scraping (respect robots.txt + ToS).
