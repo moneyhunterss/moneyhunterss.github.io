@@ -3,294 +3,305 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IGETTHINGSDONE.</title>
-<meta name="description" content="Anonymous developer. I build hardcore tools — port scanners, encryption, Discord bots, scrapers, CLI tools. Real code, no fluff. 24h proof-of-concept, free.">
+<title>IGETTHINGSDONE — Freelance Developer & Designer</title>
+<meta name="description" content="Freelance developer and designer. Web apps, security tools, automation, brand systems. Available for project work — fixed pricing, 24h proof-of-concept.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #000;
-    --text: #fff;
-    --accent: #FFE600;
-    --accent-2: #FF4D00;
-    --muted: #666;
-    --dim: #1a1a1a;
-    --line: #2a2a2a;
+    --bg: #0a0a0b;
+    --bg-2: #131316;
+    --text: #f5f5f7;
+    --text-2: #a1a1aa;
+    --text-3: #71717a;
+    --accent: #6366f1;
+    --accent-2: #818cf8;
+    --border: #1f1f23;
+    --card: #131316;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-family: 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
-    line-height: 1.5;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
   }
-  body { font-size: 16px; }
-  body::before {
-    content: '';
-    position: fixed; inset: 0; pointer-events: none; z-index: 0;
-    background-image:
-      linear-gradient(to right, var(--dim) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--dim) 1px, transparent 1px);
-    background-size: 80px 80px;
-    opacity: 0.4;
-  }
-  .topbar {
+  a { color: var(--accent-2); text-decoration: none; transition: color .15s; }
+  a:hover { color: var(--text); }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: var(--bg); border-bottom: 1px solid var(--line);
-    padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,10,11,0.72);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--border);
   }
-  .brand { font-weight: 800; letter-spacing: -1px; font-size: 14px; }
-  .brand .dot { color: var(--accent); }
-  .topbar nav { display: flex; gap: 24px; }
-  .topbar a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color .15s; }
-  .topbar a:hover { color: var(--accent); }
-  .topbar .status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
-  .status .pulse { width: 8px; height: 8px; border-radius: 50%; background: #10b981; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100% {opacity:1;} 50% {opacity:0.4;} }
-  @media (max-width: 768px) { .topbar nav, .topbar .status { display: none; } }
-
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-  .hero { padding: 160px 0 80px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-  .hero .label { color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
-  .hero h1 { font-size: clamp(48px, 12vw, 180px); font-weight: 900; line-height: 0.9; letter-spacing: -4px; margin-bottom: 32px; }
-  .hero h1 .dot { color: var(--accent); }
-  .hero .sub { font-size: clamp(16px, 2vw, 22px); color: var(--muted); max-width: 700px; margin-bottom: 48px; font-family: -apple-system, Inter, sans-serif; }
-  .hero .sub strong { color: var(--text); font-weight: 600; }
-  .hero .cta { display: inline-flex; gap: 16px; flex-wrap: wrap; }
-  .btn { padding: 14px 24px; border: 1px solid var(--text); color: var(--text); text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.5px; transition: all .15s; background: var(--bg); }
-  .btn:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-  .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-  .btn.primary:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
-
-  .terminal { margin: 100px 0; border: 1px solid var(--line); background: #050505; overflow: hidden; }
-  .terminal .head { background: var(--dim); padding: 8px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--line); }
-  .terminal .dot-r { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
-  .terminal .dot-y { width: 10px; height: 10px; border-radius: 50%; background: #febc2e; }
-  .terminal .dot-g { width: 10px; height: 10px; border-radius: 50%; background: #28c840; }
-  .terminal .title { color: var(--muted); font-size: 12px; margin-left: 8px; }
-  .terminal .body { padding: 24px; font-size: 14px; line-height: 1.7; min-height: 320px; font-family: 'IBM Plex Mono', monospace; }
-  .terminal .line { white-space: pre-wrap; word-break: break-word; }
-  .terminal .prompt { color: var(--accent); }
-  .terminal .out { color: var(--text); padding-left: 16px; }
-  .cursor { display: inline-block; width: 8px; height: 16px; background: var(--accent); vertical-align: text-bottom; animation: blink 1s infinite; }
-  @keyframes blink { 0%,49% {opacity:1;} 50%,100% {opacity:0;} }
-
-  .section { padding: 80px 0; border-top: 1px solid var(--line); }
-  .section .label { color: var(--muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-  .section h2 { font-size: clamp(36px, 6vw, 80px); font-weight: 900; letter-spacing: -2px; margin-bottom: 48px; line-height: 1; }
-  .section h2 .accent { color: var(--accent); }
-
-  .work-list { list-style: none; }
-  .work-item { border-top: 1px solid var(--line); padding: 32px 0; display: grid; grid-template-columns: 60px 1fr 200px 100px; gap: 24px; align-items: center; transition: background .15s; }
-  .work-item:last-child { border-bottom: 1px solid var(--line); }
-  .work-item:hover { background: var(--dim); }
-  .work-item .num { color: var(--muted); font-size: 13px; font-weight: 700; }
-  .work-item .info h3 { font-size: clamp(20px, 3vw, 32px); font-weight: 800; letter-spacing: -1px; margin-bottom: 4px; }
-  .work-item .info h3 a { color: var(--text); text-decoration: none; }
-  .work-item:hover .info h3 a { color: var(--accent); }
-  .work-item .info .desc { color: var(--muted); font-size: 14px; font-family: -apple-system, Inter, sans-serif; }
-  .work-item .stack { display: flex; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
-  .work-item .stack span { border: 1px solid var(--line); padding: 3px 8px; }
-  .work-item .live { text-align: right; font-size: 13px; }
-  .work-item .live a { color: var(--accent); text-decoration: none; font-weight: 700; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
-  @media (max-width: 768px) { .work-item { grid-template-columns: 40px 1fr; } .work-item .stack, .work-item .live { grid-column: 2; text-align: left; } }
-
-  .can-build { list-style: none; max-width: 900px; }
-  .can-build li { padding: 16px 0; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 16px; font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; letter-spacing: -0.5px; }
-  .can-build li:last-child { border-bottom: none; }
-  .can-build li .x { color: var(--accent); font-size: 20px; flex-shrink: 0; }
-  .can-build li .tags { margin-left: auto; color: var(--muted); font-size: 13px; font-family: -apple-system, Inter, sans-serif; font-weight: 400; }
-
-  .pitch { padding: 120px 0; text-align: center; border-top: 1px solid var(--line); background: var(--accent); color: var(--bg); }
-  .pitch h2 { font-size: clamp(36px, 6vw, 72px); font-weight: 900; letter-spacing: -2px; margin-bottom: 24px; line-height: 1; }
-  .pitch p { font-size: clamp(16px, 2vw, 20px); max-width: 600px; margin: 0 auto 40px; font-family: -apple-system, Inter, sans-serif; }
-  .pitch .btn { background: var(--bg); color: var(--accent); border-color: var(--bg); }
-  .pitch .btn:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
-
-  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 48px; }
-  .contact-card { background: var(--bg); padding: 32px; text-align: center; transition: background .15s; }
-  .contact-card:hover { background: var(--dim); }
-  .contact-card .icon { font-size: 32px; margin-bottom: 12px; }
-  .contact-card .label { color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-  .contact-card .value { font-size: 16px; font-weight: 700; word-break: break-all; }
-  .contact-card .value a { color: var(--accent); text-decoration: none; }
+  nav .container { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; }
+  .logo { font-weight: 800; font-size: 15px; letter-spacing: -0.3px; }
+  .logo .dot { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 32px; }
+  nav a { color: var(--text-2); font-size: 14px; font-weight: 500; }
+  nav a:hover { color: var(--text); }
+  nav .cta a { font-size: 13px; font-weight: 600; padding: 8px 14px; border: 1px solid var(--border); border-radius: 6px; color: var(--text); }
+  nav .cta a.primary { background: var(--accent); border-color: var(--accent); color: white; }
+  nav .cta a.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+  @media (max-width: 768px) { nav ul { display: none; } }
+  .hero { padding: 160px 0 100px; background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.15), transparent); text-align: center; }
+  .hero .badge { display: inline-block; padding: 6px 14px; border-radius: 100px; background: var(--bg-2); border: 1px solid var(--border); font-size: 12px; color: var(--text-2); font-weight: 500; margin-bottom: 32px; }
+  .hero .badge .dot { display: inline-block; width: 6px; height: 6px; background: #10b981; border-radius: 50%; margin-right: 6px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .hero h1 { font-size: clamp(40px, 7vw, 80px); font-weight: 800; letter-spacing: -3px; line-height: 1.05; margin-bottom: 24px; background: linear-gradient(180deg, var(--text) 0%, var(--text-2) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: clamp(16px, 2.2vw, 20px); color: var(--text-2); max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
+  .hero .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { padding: 12px 22px; border-radius: 8px; font-weight: 600; font-size: 14px; transition: all .15s; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px; }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: var(--accent-2); transform: translateY(-1px); }
+  .btn-secondary { background: var(--bg-2); color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { border-color: var(--accent); }
+  section { padding: 100px 0; border-top: 1px solid var(--border); }
+  .section-header { text-align: center; margin-bottom: 64px; }
+  .section-header .eyebrow { color: var(--accent-2); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .section-header h2 { font-size: clamp(32px, 4.5vw, 48px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; }
+  .section-header p { color: var(--text-2); font-size: 17px; max-width: 540px; margin: 0 auto; }
+  .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .work-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: all .2s; display: flex; flex-direction: column; }
+  .work-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .work-card .preview { height: 180px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--bg-2), var(--bg)); border-bottom: 1px solid var(--border); position: relative; }
+  .work-card .preview .icon { font-size: 48px; opacity: 0.6; }
+  .work-card .preview .tag { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 100px; background: rgba(99,102,241,0.15); color: var(--accent-2); font-size: 11px; font-weight: 600; border: 1px solid rgba(99,102,241,0.3); }
+  .work-card .body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+  .work-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .work-card .desc { color: var(--text-2); font-size: 14px; line-height: 1.6; margin-bottom: 16px; flex: 1; }
+  .work-card .stack { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .work-card .stack span { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg); color: var(--text-3); border: 1px solid var(--border); font-family: ui-monospace, monospace; }
+  .work-card .link { color: var(--accent-2); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+  .work-card .link:hover { color: var(--text); }
+  @media (max-width: 768px) { .work-grid { grid-template-columns: 1fr; } }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .service { background: var(--card); border: 1px solid var(--border); padding: 28px; border-radius: 12px; transition: all .2s; }
+  .service:hover { border-color: var(--accent); }
+  .service .icon { font-size: 24px; margin-bottom: 16px; }
+  .service h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .service p { color: var(--text-2); font-size: 14px; }
+  @media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .step { text-align: center; padding: 24px; }
+  .step .num { width: 48px; height: 48px; border-radius: 50%; background: var(--bg-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700; color: var(--accent-2); }
+  .step h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .step p { color: var(--text-2); font-size: 13px; line-height: 1.6; }
+  @media (max-width: 768px) { .process-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
+  .cta-section { text-align: center; padding: 120px 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(99,102,241,0.15), transparent), var(--bg); border-top: 1px solid var(--border); }
+  .cta-section h2 { font-size: clamp(32px, 4.5vw, 56px); font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; line-height: 1.1; }
+  .cta-section p { color: var(--text-2); font-size: 17px; max-width: 500px; margin: 0 auto 40px; }
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 700px; margin: 0 auto; }
+  .contact-card { background: var(--card); border: 1px solid var(--border); padding: 28px; border-radius: 12px; text-align: center; transition: all .2s; }
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .contact-card .icon { font-size: 28px; margin-bottom: 12px; }
+  .contact-card .label { color: var(--text-3); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .contact-card .value { font-size: 15px; font-weight: 600; word-break: break-all; }
+  .contact-card .value a { color: var(--text); }
+  .contact-card .value a:hover { color: var(--accent-2); }
   @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
-
-  footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; text-align: center; }
-  footer .ascii { font-family: monospace; white-space: pre; line-height: 1.1; margin-bottom: 16px; color: var(--line); }
+  footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-3); font-size: 13px; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brand">IGETTHINGSDONE<span class="dot">.</span></div>
-  <nav>
-    <a href="#work">work</a>
-    <a href="#can-build">can-build</a>
-    <a href="#pitch">pitch</a>
-    <a href="#contact">contact</a>
-  </nav>
-  <div class="status"><span class="pulse"></span> available now</div>
-</div>
-
-<div class="container">
-
-  <section class="hero">
-    <div class="label">// anonymous developer — hardcore tools</div>
-    <h1>IGET<br>THINGS<br>DONE<span class="dot">.</span></h1>
-    <p class="sub">
-      I build <strong>security tools, scrapers, bots, CLI utilities, encryption</strong>.
-      I work <strong>fast</strong> (24h prototypes), <strong>quietly</strong> (no credentials shared),
-      and <strong>for free first</strong> — you see my code before any invoice.
-    </p>
+<nav>
+  <div class="container">
+    <div class="logo">IGETTHINGSDONE<span class="dot">.</span></div>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
     <div class="cta">
-      <a href="#pitch" class="btn primary">Start a project →</a>
-      <a href="#work" class="btn">View work</a>
+      <a href="#contact" class="primary">Start a project</a>
     </div>
-  </section>
-
-  <div class="terminal" id="terminal">
-    <div class="head">
-      <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
-      <div class="title">~/portfolio — zsh</div>
-    </div>
-    <div class="body" id="term-body"></div>
   </div>
+</nav>
 
-  <section class="section" id="work">
-    <div class="label">// 08 selected projects</div>
-    <h2>WORK<span class="accent">.</span></h2>
-    <ul class="work-list">
+<header class="hero">
+  <div class="container">
+    <div class="badge"><span class="dot"></span> Available for new projects</div>
+    <h1>Freelance developer<br>and designer.</h1>
+    <p>I build web apps, security tools, automation, and brand systems. Fixed-price quotes, 24-hour proof-of-concept, and clean code you own.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">Start a project →</a>
+      <a href="#work" class="btn btn-secondary">View work</a>
+    </div>
+  </div>
+</header>
 
-      <li class="work-item">
-        <div class="num">01</div>
-        <div class="info">
-          <h3><a href="./samples/port-scanner/" target="_blank">Port Scanner</a></h3>
-          <div class="desc">Concurrent TCP port scanner. 100 workers, service identification, flexible port ranges. Stdlib only — zero deps.</div>
+<section id="work">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">Selected Work</div>
+      <h2>Recent projects</h2>
+      <p>A selection of tools and applications I've built. All code is real, runnable, and linked from the project pages.</p>
+    </div>
+    <div class="work-grid">
+
+      <div class="work-card">
+        <div class="preview"><div class="icon">🔒</div><div class="tag">Security</div></div>
+        <div class="body">
+          <h3>AES-256 File Encryption</h3>
+          <p class="desc">Authenticated file encryption using AES-256-GCM. PBKDF2 key derivation with 600,000 iterations, random salt and nonce per file, built-in tamper detection.</p>
+          <div class="stack"><span>Python</span><span>cryptography</span><span>PBKDF2</span></div>
+          <a href="./samples/encrypt-tool/" class="link" target="_blank">View code →</a>
         </div>
-        <div class="stack"><span>Python</span><span>socket</span><span>concurrent.futures</span></div>
-        <div class="live"><a href="./samples/port-scanner/" target="_blank">code →</a></div>
-      </li>
+      </div>
 
-      <li class="work-item">
-        <div class="num">02</div>
-        <div class="info">
-          <h3><a href="./samples/encrypt-tool/" target="_blank">AES-256 File Encryption</a></h3>
-          <div class="desc">AES-256-GCM authenticated encryption. PBKDF2 key derivation (600k iterations), random salt + nonce per file. Tamper detection built in.</div>
+      <div class="work-card">
+        <div class="preview"><div class="icon">🌐</div><div class="tag">Network</div></div>
+        <div class="body">
+          <h3>Concurrent Port Scanner</h3>
+          <p class="desc">TCP port scanner with 100 concurrent workers. IANA service identification, flexible port ranges, and configurable timeout. Standard library only — zero dependencies.</p>
+          <div class="stack"><span>Python</span><span>socket</span><span>concurrent.futures</span></div>
+          <a href="./samples/port-scanner/" class="link" target="_blank">View code →</a>
         </div>
-        <div class="stack"><span>Python</span><span>cryptography</span><span>PBKDF2</span></div>
-        <div class="live"><a href="./samples/encrypt-tool/" target="_blank">code →</a></div>
-      </li>
+      </div>
 
-      <li class="work-item">
-        <div class="num">03</div>
-        <div class="info">
-          <h3><a href="./samples/discord-bot/" target="_blank">Discord Bot</a></h3>
-          <div class="desc">Production bot skeleton. Slash commands, role-based permissions, member management, embeds, error handling. discord.py 2.x.</div>
+      <div class="work-card">
+        <div class="preview"><div class="icon">🤖</div><div class="tag">Bot</div></div>
+        <div class="body">
+          <h3>Discord Bot Framework</h3>
+          <p class="desc">Production-ready Discord bot with slash commands, role-based permissions, member management, rich embeds, and error handling. Built on discord.py 2.x.</p>
+          <div class="stack"><span>Python</span><span>discord.py</span><span>async</span></div>
+          <a href="./samples/discord-bot/" class="link" target="_blank">View code →</a>
         </div>
-        <div class="stack"><span>Python</span><span>discord.py</span><span>async</span></div>
-        <div class="live"><a href="./samples/discord-bot/" target="_blank">code →</a></div>
-      </li>
+      </div>
 
-      <li class="work-item">
-        <div class="num">04</div>
-        <div class="info">
-          <h3><a href="./samples/cli-tool/" target="_blank">File Watcher CLI</a></h3>
-          <div class="desc">watchdir — watches a directory for new files matching a regex, runs a command. Like inotify + cron. Auto-process CSVs, auto-resize images, auto-deploy.</div>
+      <div class="work-card">
+        <div class="preview"><div class="icon">⚡</div><div class="tag">CLI</div></div>
+        <div class="body">
+          <h3>File Watcher CLI</h3>
+          <p class="desc">Directory watcher with regex triggers. Watches for new files matching a pattern and runs a command — like inotify and cron combined. Useful for auto-processing pipelines.</p>
+          <div class="stack"><span>Python</span><span>stdlib</span><span>subprocess</span></div>
+          <a href="./samples/cli-tool/" class="link" target="_blank">View code →</a>
         </div>
-        <div class="stack"><span>Python</span><span>stdlib</span><span>subprocess</span></div>
-        <div class="live"><a href="./samples/cli-tool/" target="_blank">code →</a></div>
-      </li>
+      </div>
 
-      <li class="work-item">
-        <div class="num">05</div>
-        <div class="info">
-          <h3><a href="./samples/reddit-scraper/" target="_blank">Web Scraper Framework</a></h3>
-          <div class="desc">Generic web scraper — concurrent workers, rate-limit handling, pagination, export to CSV/JSON/Markdown. Built for any site, not just one.</div>
+      <div class="work-card">
+        <div class="preview"><div class="icon">🕷️</div><div class="tag">Scraping</div></div>
+        <div class="body">
+          <h3>Web Scraper Framework</h3>
+          <p class="desc">Concurrent web scraper framework. Handles rate limits with exponential backoff, supports pagination, extracts structured data, and exports to CSV, JSON, or Markdown.</p>
+          <div class="stack"><span>Python</span><span>concurrent</span><span>CSV/JSON</span></div>
+          <a href="./samples/reddit-scraper/" class="link" target="_blank">View code →</a>
         </div>
-        <div class="stack"><span>Python</span><span>requests</span><span>concurrent</span></div>
-        <div class="live"><a href="./samples/reddit-scraper/" target="_blank">code →</a></div>
-      </li>
+      </div>
 
-      <li class="work-item">
-        <div class="num">06</div>
-        <div class="info">
-          <h3><a href="./samples/ecommerce-checkout/" target="_blank">E-commerce Checkout</a></h3>
-          <div class="desc">Working vanilla JS checkout. Cart, tax calc, payment form validation, order confirmation. 3KB total. Try it — use card 4242 4242 4242 4242.</div>
+      <div class="work-card">
+        <div class="preview"><div class="icon">🎨</div><div class="tag">Design</div></div>
+        <div class="body">
+          <h3>Brand Identity Systems</h3>
+          <p class="desc">Three complete brand identity concepts — logo, color palette, typography system, and usage guidelines. Delivered as SVG source files with full brand guide documentation.</p>
+          <div class="stack"><span>Figma</span><span>SVG</span><span>Illustrator</span></div>
+          <a href="./samples/brand-system/" class="link" target="_blank">View designs →</a>
         </div>
-        <div class="stack"><span>HTML</span><span>CSS</span><span>vanilla JS</span></div>
-        <div class="live"><a href="./samples/ecommerce-checkout/" target="_blank">live →</a></div>
-      </li>
+      </div>
 
-      <li class="work-item">
-        <div class="num">07</div>
-        <div class="info">
-          <h3><a href="./samples/brand-system/" target="_blank">Brand Identity Systems</a></h3>
-          <div class="desc">Three SVG brand concepts (Meridian, Verdant, Apex). Logo, palette, typography. Figma-native, ships with SVG source + brand guide.</div>
-        </div>
-        <div class="stack"><span>Figma</span><span>SVG</span><span>Illustrator</span></div>
-        <div class="live"><a href="./samples/brand-system/" target="_blank">view →</a></div>
-      </li>
-
-      <li class="work-item">
-        <div class="num">08</div>
-        <div class="info">
-          <h3><a href="./samples/mobile-ui/" target="_blank">Mobile UI Mockup</a></h3>
-          <div class="desc">Meditation app — 4-screen UI mockup. Onboarding, home, streaks, library. HTML mockup that translates directly to React Native.</div>
-        </div>
-        <div class="stack"><span>HTML</span><span>CSS</span><span>React Native</span></div>
-        <div class="live"><a href="./samples/mobile-ui/" target="_blank">view →</a></div>
-      </li>
-
-    </ul>
-  </section>
-
-  <section class="section" id="can-build">
-    <div class="label">// what i can build for you</div>
-    <h2>CAN<span class="accent">BUILD.</span></h2>
-    <ul class="can-build">
-      <li><span class="x">×</span> Security tools <span class="tags">port scanners, network recon, vulnerability checks</span></li>
-      <li><span class="x">×</span> Cryptography <span class="tags">AES-256, RSA, hashing, key derivation, signing</span></li>
-      <li><span class="x">×</span> Scrapers & crawlers <span class="tags">Python, Selenium, Playwright, concurrent</span></li>
-      <li><span class="x">×</span> Bots <span class="tags">Discord, Telegram, Slack, IRC, Mattermost</span></li>
-      <li><span class="x">×</span> CLI tools <span class="tags">file watchers, batch processors, automation scripts</span></li>
-      <li><span class="x">×</span> Web apps <span class="tags">Next.js, React, Vue, Node, Postgres</span></li>
-      <li><span class="x">×</span> Browser extensions <span class="tags">Chrome MV3, Firefox, Tampermonkey</span></li>
-      <li><span class="x">×</span> APIs & integrations <span class="tags">REST, GraphQL, webhooks, OAuth, Stripe</span></li>
-      <li><span class="x">×</span> Automation pipelines <span class="tags">cron, GitHub Actions, Docker, n8n</span></li>
-      <li><span class="x">×</span> Brand identity <span class="tags">logos, palettes, typography, brand guides</span></li>
-      <li><span class="x">×</span> Mobile apps <span class="tags">React Native + Expo, iOS + Android</span></li>
-      <li><span class="x">×</span> Web3 <span class="tags">Solidity, Web3.js, ethers.js, NFT mint sites</span></li>
-    </ul>
-  </section>
-
-</div>
-
-<section class="pitch" id="pitch">
-  <h2>THE DEAL.</h2>
-  <p>
-    Send me your spec. Within <strong>24 hours</strong>, I'll ship a working proof-of-concept
-    on a slice of it. Free. You see my code, my style, my speed.
-    If you don't like it, walk away — no invoice, no follow-up.
-    If you do, we talk money. Crypto or PayPal.
-  </p>
-  <a href="#contact" class="btn">Send spec →</a>
+    </div>
+  </div>
 </section>
 
-<section class="section" id="contact">
+<section id="services">
   <div class="container">
-    <div class="label">// how to reach me</div>
-    <h2>CONTACT<span class="accent">.</span></h2>
-    <div class="contact-grid">
-      <div class="contact-card">
-        <div class="icon">💬</div>
-        <div class="label">Telegram</div>
-        <div class="value"><a href="https://t.me/Diigestssbot" target="_blank">@Diigestssbot</a></div>
+    <div class="section-header">
+      <div class="eyebrow">Services</div>
+      <h2>What I build</h2>
+      <p>Full-stack coverage — from low-level systems to polished UI. Fixed-price quotes after a free scoping call.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service">
+        <div class="icon">⚙️</div>
+        <h3>Web applications</h3>
+        <p>Next.js, React, Vue, Node. SaaS dashboards, e-commerce, internal tools.</p>
       </div>
+      <div class="service">
+        <div class="icon">🔐</div>
+        <h3>Security tools</h3>
+        <p>Port scanners, network recon, encryption utilities, vulnerability checks.</p>
+      </div>
+      <div class="service">
+        <div class="icon">🤖</div>
+        <h3>Bots & automation</h3>
+        <p>Discord, Telegram, Slack. Scheduled tasks, pipelines, webhook integrations.</p>
+      </div>
+      <div class="service">
+        <div class="icon">🕷️</div>
+        <h3>Web scraping</h3>
+        <p>Concurrent scrapers, data pipelines, export to CSV/JSON/database. Anti-detection.</p>
+      </div>
+      <div class="service">
+        <div class="icon">🎨</div>
+        <h3>Brand & design</h3>
+        <p>Logo systems, UI design, brand guidelines. Figma-native with SVG source.</p>
+      </div>
+      <div class="service">
+        <div class="icon">📱</div>
+        <h3>Mobile apps</h3>
+        <p>React Native + Expo. Cross-platform iOS and Android from one codebase.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">Process</div>
+      <h2>How we'll work</h2>
+      <p>Clear, fixed-scope process. No surprise invoices, no mystery deliverables.</p>
+    </div>
+    <div class="process-grid">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Scoping call</h3>
+        <p>15-minute call to understand your project. You describe the goal, I ask technical questions.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Proof-of-concept</h3>
+        <p>Within 24 hours, I deliver a working slice of your spec. You evaluate the code before committing.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Fixed quote</h3>
+        <p>Based on the prototype, I provide a fixed-price quote. 50% to start, 50% on delivery.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h3>Ship & handoff</h3>
+        <p>Code delivered to your repository with documentation. 14 days of free bug fixes included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="container">
+    <h2>Let's build something.</h2>
+    <p>Send me your project brief. I'll reply within 12 hours with a plan for a free 24-hour proof-of-concept.</p>
+    <div class="contact-grid">
       <div class="contact-card">
         <div class="icon">✉️</div>
         <div class="label">Email</div>
         <div class="value"><a href="mailto:moneyhunterss@proton.me">moneyhunterss@proton.me</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon">💬</div>
+        <div class="label">Telegram</div>
+        <div class="value"><a href="https://t.me/Diigestssbot" target="_blank">@Diigestssbot</a></div>
       </div>
       <div class="contact-card">
         <div class="icon">🐙</div>
@@ -302,95 +313,10 @@
 </section>
 
 <footer>
-  <div class="ascii">    _   ___     _   _            _   _       _     _
-   (_) / __|___| | | | ___  ___| |_| |_ ___| |   | |
-   _  \__ \ _ \ |_| |/ _ \/ __| __| __/ _ \ |   | |
-  (_) |___/___/\__,_|\___|\___|_|\__\___/_|___|_|</div>
-  <p>© 2026 · Anonymous · Available worldwide · Crypto or PayPal · No KYC</p>
+  <div class="container">
+    <p>© 2026 IGETTHINGSDONE · Available worldwide · Crypto or PayPal</p>
+  </div>
 </footer>
-
-<script>
-const term = document.getElementById('term-body');
-const lines = [
-  {type: 'cmd', text: 'whoami'},
-  {type: 'out', text: 'anonymous developer. ships fast. asks for spec, not credentials.'},
-  {type: 'cmd', text: 'ls work/'},
-  {type: 'out', text: 'port-scanner/       (concurrent TCP scanner, 100 workers)'},
-  {type: 'out', text: 'encrypt-tool/       (AES-256-GCM, PBKDF2 600k iterations)'},
-  {type: 'out', text: 'discord-bot/        (slash commands, role management)'},
-  {type: 'out', text: 'cli-tool/           (file watcher + regex triggers)'},
-  {type: 'out', text: 'web-scraper/        (concurrent, rate-limit handling)'},
-  {type: 'out', text: 'ecommerce-checkout/ (vanilla JS, 3KB total)'},
-  {type: 'out', text: 'brand-systems/     (3 SVG logos, Figma-native)'},
-  {type: 'out', text: 'mobile-ui/         (4-screen app mockup)'},
-  {type: 'cmd', text: 'cat pitch.txt'},
-  {type: 'out', text: '"Send me your spec. I\'ll ship a 24h proof-of-concept. Free."'},
-  {type: 'out', text: '"No invoice until you\'ve seen the code. Walk away any time."'},
-  {type: 'cmd', text: 'cat pricing.txt'},
-  {type: 'out', text: 'micro $25-$200 / standard $200-$1k / pro $1k-$10k+'},
-  {type: 'out', text: 'crypto (BTC/ETH/USDT) or PayPal. No KYC.'},
-  {type: 'cmd', text: '_'},
-];
-
-let i = 0;
-let charI = 0;
-let currentEl = null;
-
-function typeNext() {
-  if (i >= lines.length) return;
-  const line = lines[i];
-  if (charI === 0) {
-    currentEl = document.createElement('div');
-    currentEl.className = 'line';
-    if (line.type === 'cmd') {
-      currentEl.innerHTML = '<span class="prompt">$</span> ';
-      term.appendChild(currentEl);
-      const prev = term.querySelectorAll('.cursor');
-      prev.forEach(c => c.remove());
-    } else {
-      currentEl.className = 'line out';
-      term.appendChild(currentEl);
-    }
-  }
-  if (line.type === 'cmd') {
-    if (charI < line.text.length) {
-      currentEl.innerHTML = '<span class="prompt">$</span> ' + line.text.slice(0, charI + 1);
-      charI++;
-      setTimeout(typeNext, 50 + Math.random() * 60);
-    } else {
-      currentEl.innerHTML = '<span class="prompt">$</span> ' + line.text + '<span class="cursor"></span>';
-      setTimeout(() => {
-        const c = currentEl.querySelector('.cursor');
-        if (c) c.remove();
-        i++; charI = 0; currentEl = null;
-        setTimeout(typeNext, 300);
-      }, 400);
-    }
-  } else {
-    currentEl.textContent = line.text;
-    i++; charI = 0; currentEl = null;
-    setTimeout(typeNext, 80 + Math.random() * 100);
-  }
-}
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      typeNext();
-      observer.unobserve(entry.target);
-    }
-  });
-}, {threshold: 0.3});
-observer.observe(document.getElementById('terminal'));
-
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) target.scrollIntoView({behavior: 'smooth'});
-  });
-});
-</script>
 
 </body>
 </html>
