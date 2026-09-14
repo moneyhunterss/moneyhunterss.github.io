@@ -3,526 +3,531 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MH — Full-stack Developer & Designer</title>
-<meta name="description" content="Full-stack developer + designer. Web apps, automation, branding, data scraping. Available for freelance work — paid in crypto or fiat.">
+<title>IGETTHINGSDONE.</title>
+<meta name="description" content="Anonymous freelancer. I build stuff. Real code, real demos, real GitHub. 24h proof-of-concept, free. DM me.">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --bg-alt: #13131a;
-    --text: #e4e4e7;
-    --muted: #71717a;
-    --accent: #f59e0b;
-    --accent-hover: #fbbf24;
-    --border: #27272a;
-    --card: #16161d;
+    --bg: #000;
+    --text: #fff;
+    --accent: #FFE600;
+    --accent-2: #FF4D00;
+    --muted: #666;
+    --dim: #1a1a1a;
+    --line: #2a2a2a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  html, body {
     background: var(--bg);
     color: var(--text);
-    line-height: 1.6;
+    font-family: 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { color: var(--accent-hover); }
+  body { font-size: 16px; }
 
-  /* NAV */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(10,10,15,0.85); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+  /* GRID OVERLAY (subtle background grid) */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(to right, var(--dim) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--dim) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.4;
   }
-  nav .container {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 24px;
+
+  /* TOP BAR */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--bg); border-bottom: 1px solid var(--line);
+    padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;
   }
-  .logo { font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
-  .logo span { color: var(--accent); }
-  nav ul { list-style: none; display: flex; gap: 28px; }
-  nav a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color .15s; }
-  nav a:hover { color: var(--text); }
+  .brand {
+    font-weight: 800; letter-spacing: -1px; font-size: 14px;
+  }
+  .brand .dot { color: var(--accent); }
+  .topbar nav { display: flex; gap: 24px; }
+  .topbar a {
+    color: var(--muted); font-size: 13px; text-decoration: none;
+    transition: color .15s;
+  }
+  .topbar a:hover { color: var(--accent); }
+  .topbar .status {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--muted);
+  }
+  .status .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: #10b981;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  @media (max-width: 768px) { .topbar nav, .topbar .status { display: none; } }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
   /* HERO */
   .hero {
-    padding: 120px 0 80px;
-    background: radial-gradient(circle at 20% 0%, rgba(245,158,11,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(245,158,11,0.05) 0%, transparent 50%);
-    text-align: center;
+    padding: 160px 0 80px;
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero .label {
+    color: var(--muted); font-size: 13px; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 24px;
   }
   .hero h1 {
-    font-size: clamp(36px, 6vw, 72px);
-    font-weight: 800; letter-spacing: -2px; line-height: 1.05;
-    margin-bottom: 24px;
+    font-size: clamp(48px, 12vw, 180px);
+    font-weight: 900; line-height: 0.9; letter-spacing: -4px;
+    margin-bottom: 32px;
   }
-  .hero h1 .accent { color: var(--accent); }
-  .hero p {
-    font-size: 20px; color: var(--muted); max-width: 600px;
-    margin: 0 auto 36px;
+  .hero h1 .dot { color: var(--accent); }
+  .hero .sub {
+    font-size: clamp(16px, 2vw, 22px);
+    color: var(--muted); max-width: 600px; margin-bottom: 48px;
+    font-family: -apple-system, Inter, sans-serif;
   }
+  .hero .sub strong { color: var(--text); font-weight: 600; }
   .hero .cta {
-    display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    display: inline-flex; gap: 16px; flex-wrap: wrap;
   }
   .btn {
-    padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px;
-    transition: all .15s; cursor: pointer; border: none;
+    padding: 14px 24px; border: 1px solid var(--text); color: var(--text);
+    text-decoration: none; font-weight: 700; font-size: 14px;
+    letter-spacing: 0.5px; transition: all .15s;
+    background: var(--bg);
   }
-  .btn-primary {
-    background: var(--accent); color: #0a0a0f;
-  }
-  .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
-  .btn-secondary {
-    background: var(--bg-alt); color: var(--text); border: 1px solid var(--border);
-  }
-  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .btn:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .btn.primary:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-  /* STATS */
-  .stats {
-    padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    background: var(--bg-alt);
+  /* TERMINAL */
+  .terminal {
+    margin: 100px 0; padding: 0; border: 1px solid var(--line);
+    background: #050505; border-radius: 0; overflow: hidden;
   }
-  .stats .container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
-  .stat .num { font-size: 40px; font-weight: 800; color: var(--accent); line-height: 1; }
-  .stat .label { color: var(--muted); font-size: 14px; margin-top: 8px; }
-
-  /* SECTIONS */
-  section { padding: 100px 0; }
-  section h2 {
-    font-size: clamp(28px, 4vw, 44px); font-weight: 800;
-    letter-spacing: -1px; margin-bottom: 12px;
+  .terminal .head {
+    background: var(--dim); padding: 8px 16px; display: flex;
+    align-items: center; gap: 8px; border-bottom: 1px solid var(--line);
   }
-  section .section-sub {
-    color: var(--muted); font-size: 18px; margin-bottom: 60px; max-width: 600px;
+  .terminal .dot-r { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
+  .terminal .dot-y { width: 10px; height: 10px; border-radius: 50%; background: #febc2e; }
+  .terminal .dot-g { width: 10px; height: 10px; border-radius: 50%; background: #28c840; }
+  .terminal .title {
+    color: var(--muted); font-size: 12px; margin-left: 8px;
   }
-
-  /* SKILLS */
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .skill-card {
-    background: var(--card); border: 1px solid var(--border);
-    padding: 32px; border-radius: 12px; transition: all .2s;
+  .terminal .body {
+    padding: 24px; font-size: 14px; line-height: 1.7; min-height: 320px;
+    font-family: 'IBM Plex Mono', monospace;
   }
-  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .skill-card .icon { font-size: 32px; margin-bottom: 16px; }
-  .skill-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-  .skill-card p { color: var(--muted); font-size: 14px; }
-  .skill-card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px; }
-  .skill-card .tag {
-    background: var(--bg-alt); color: var(--text); padding: 4px 10px;
-    border-radius: 4px; font-size: 12px; font-family: monospace;
-    border: 1px solid var(--border);
+  .terminal .line { white-space: pre-wrap; word-break: break-word; }
+  .terminal .prompt { color: var(--accent); }
+  .terminal .out { color: var(--text); padding-left: 16px; }
+  .terminal .dim { color: var(--muted); }
+  .terminal .hi { color: var(--accent); }
+  .cursor {
+    display: inline-block; width: 8px; height: 16px;
+    background: var(--accent); vertical-align: text-bottom;
+    animation: blink 1s infinite;
+  }
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
   }
 
-  /* PROJECTS */
-  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .project-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden; transition: all .2s;
+  /* WORK SECTION */
+  .section { padding: 80px 0; border-top: 1px solid var(--line); }
+  .section .label {
+    color: var(--muted); font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 8px;
   }
-  .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-  .project-card .preview {
-    height: 200px; background: linear-gradient(135deg, #1a1a25 0%, #2a2a35 100%);
-    position: relative; display: flex; align-items: center; justify-content: center;
-    border-bottom: 1px solid var(--border);
+  .section h2 {
+    font-size: clamp(36px, 6vw, 80px); font-weight: 900;
+    letter-spacing: -2px; margin-bottom: 48px; line-height: 1;
   }
-  .project-card .preview .emoji { font-size: 64px; opacity: 0.4; }
-  .project-card .preview .badge {
-    position: absolute; top: 12px; right: 12px;
-    background: var(--accent); color: #0a0a0f;
-    padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700;
-  }
-  .project-card .body { padding: 24px; }
-  .project-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-  .project-card p { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
-  .project-card .stack { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-  .project-card .stack span {
-    background: var(--bg-alt); padding: 4px 10px; border-radius: 4px;
-    font-size: 12px; font-family: monospace; border: 1px solid var(--border);
-  }
-  .project-card .links { display: flex; gap: 12px; }
-  .project-card .links a {
-    font-size: 13px; font-weight: 600; color: var(--accent);
-    border-bottom: 1px solid transparent; transition: border-color .15s;
-  }
-  .project-card .links a:hover { border-color: var(--accent); }
+  .section h2 .accent { color: var(--accent); }
 
-  /* PROCESS */
-  .process { background: var(--bg-alt); }
-  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-  .step .num {
-    font-size: 48px; font-weight: 800; color: var(--accent);
-    opacity: 0.3; margin-bottom: 16px; line-height: 1;
+  /* PROJECT LIST (brutalist) */
+  .work-list { list-style: none; }
+  .work-item {
+    border-top: 1px solid var(--line);
+    padding: 32px 0; display: grid;
+    grid-template-columns: 60px 1fr 200px 100px;
+    gap: 24px; align-items: center;
+    transition: background .15s;
   }
-  .step h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-  .step p { color: var(--muted); font-size: 14px; }
+  .work-item:last-child { border-bottom: 1px solid var(--line); }
+  .work-item:hover { background: var(--dim); }
+  .work-item .num {
+    color: var(--muted); font-size: 13px; font-weight: 700;
+  }
+  .work-item .info h3 {
+    font-size: clamp(20px, 3vw, 32px); font-weight: 800;
+    letter-spacing: -1px; margin-bottom: 4px;
+  }
+  .work-item .info h3 a {
+    color: var(--text); text-decoration: none;
+  }
+  .work-item:hover .info h3 a { color: var(--accent); }
+  .work-item .info .desc {
+    color: var(--muted); font-size: 14px;
+    font-family: -apple-system, Inter, sans-serif;
+  }
+  .work-item .stack {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    font-size: 12px; color: var(--muted);
+  }
+  .work-item .stack span {
+    border: 1px solid var(--line); padding: 3px 8px;
+  }
+  .work-item .live {
+    text-align: right; font-size: 13px;
+  }
+  .work-item .live a {
+    color: var(--accent); text-decoration: none; font-weight: 700;
+    border-bottom: 1px solid var(--accent); padding-bottom: 2px;
+  }
+  @media (max-width: 768px) {
+    .work-item { grid-template-columns: 40px 1fr; }
+    .work-item .stack, .work-item .live { grid-column: 2; text-align: left; }
+  }
 
-  /* PRICING */
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .price-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 32px; text-align: center;
+  /* WHAT I BUILD (simple list) */
+  .can-build {
+    list-style: none; max-width: 800px;
   }
-  .price-card.featured {
-    border-color: var(--accent); position: relative;
+  .can-build li {
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: 16px;
+    font-size: clamp(18px, 2.5vw, 24px); font-weight: 700;
+    letter-spacing: -0.5px;
   }
-  .price-card.featured::before {
-    content: "MOST POPULAR"; position: absolute; top: -12px; left: 50%;
-    transform: translateX(-50%); background: var(--accent); color: #0a0a0f;
-    padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 700;
+  .can-build li:last-child { border-bottom: none; }
+  .can-build li .x {
+    color: var(--accent); font-size: 20px; flex-shrink: 0;
   }
-  .price-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-  .price-card .price { font-size: 36px; font-weight: 800; margin: 16px 0; color: var(--accent); }
-  .price-card .price small { font-size: 14px; color: var(--muted); font-weight: 400; }
-  .price-card ul { list-style: none; text-align: left; margin-top: 24px; }
-  .price-card li { padding: 8px 0; color: var(--muted); font-size: 14px; border-bottom: 1px solid var(--border); }
-  .price-card li:last-child { border-bottom: none; }
-  .price-card li::before { content: "✓"; color: var(--accent); margin-right: 8px; }
+  .can-build li .tags {
+    margin-left: auto; color: var(--muted); font-size: 13px;
+    font-family: -apple-system, Inter, sans-serif; font-weight: 400;
+  }
 
-  /* CASE STUDY */
-  .case-study {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 40px; margin-bottom: 24px;
+  /* PITCH (single block) */
+  .pitch {
+    padding: 120px 0; text-align: center; border-top: 1px solid var(--line);
+    background: var(--accent); color: var(--bg);
   }
-  .case-study .header { display: flex; gap: 16px; align-items: center; margin-bottom: 24px; }
-  .case-study .logo {
-    width: 48px; height: 48px; background: var(--accent);
-    border-radius: 8px; display: flex; align-items: center; justify-content: center;
-    font-weight: 800; color: #0a0a0f; font-size: 20px;
+  .pitch h2 {
+    font-size: clamp(36px, 6vw, 72px); font-weight: 900;
+    letter-spacing: -2px; margin-bottom: 24px; line-height: 1;
   }
-  .case-study h3 { font-size: 22px; font-weight: 700; }
-  .case-study .meta { color: var(--muted); font-size: 13px; }
-  .case-study .row { display: grid; grid-template-columns: 100px 1fr; gap: 16px; padding: 12px 0; border-top: 1px solid var(--border); }
-  .case-study .row:first-of-type { border-top: none; }
-  .case-study .row .label { color: var(--muted); font-size: 13px; font-weight: 600; }
-  .case-study .row .val { font-size: 14px; }
+  .pitch p {
+    font-size: clamp(16px, 2vw, 20px); max-width: 600px;
+    margin: 0 auto 40px; font-family: -apple-system, Inter, sans-serif;
+  }
+  .pitch .btn {
+    background: var(--bg); color: var(--accent);
+    border-color: var(--bg);
+  }
+  .pitch .btn:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
 
   /* CONTACT */
-  .contact { text-align: center; }
-  .contact-channels {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-    max-width: 700px; margin: 40px auto 0;
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+    margin-top: 48px;
   }
-  .channel {
-    background: var(--card); border: 1px solid var(--border);
-    padding: 24px; border-radius: 8px; transition: all .15s;
+  .contact-card {
+    background: var(--bg); padding: 32px;
+    text-align: center; transition: background .15s;
   }
-  .channel:hover { border-color: var(--accent); }
-  .channel .icon { font-size: 24px; margin-bottom: 8px; }
-  .channel .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .channel .value { font-weight: 600; margin-top: 4px; word-break: break-all; }
+  .contact-card:hover { background: var(--dim); }
+  .contact-card .icon { font-size: 32px; margin-bottom: 12px; }
+  .contact-card .label {
+    color: var(--muted); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .contact-card .value {
+    font-size: 16px; font-weight: 700; word-break: break-all;
+  }
+  .contact-card .value a { color: var(--accent); text-decoration: none; }
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
 
   /* FOOTER */
-  footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 13px; }
-
-  @media (max-width: 768px) {
-    .stats .container, .skills-grid, .process-steps, .pricing-grid, .contact-channels { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    nav ul { display: none; }
+  footer {
+    padding: 32px 0; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 12px; text-align: center;
+  }
+  footer .ascii {
+    font-family: monospace; white-space: pre; line-height: 1.1;
+    margin-bottom: 16px; color: var(--line);
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="container">
-    <div class="logo">MH<span>.</span></div>
-    <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+<div class="topbar">
+  <div class="brand">IGETTHINGSDONE<span class="dot">.</span></div>
+  <nav>
+    <a href="#work">work</a>
+    <a href="#can-build">can-build</a>
+    <a href="#pitch">pitch</a>
+    <a href="#contact">contact</a>
+  </nav>
+  <div class="status"><span class="pulse"></span> available now</div>
+</div>
 
-<header class="hero">
-  <div class="container">
-    <h1>I build <span class="accent">products</span><br>that ship.</h1>
-    <p>Full-stack developer + designer. Web apps, automation, branding, data scraping. Fast turnaround, real code, free proof-of-concept before any commitment.</p>
+<div class="container">
+
+  <section class="hero">
+    <div class="label">// anonymous freelance developer</div>
+    <h1>IGET<br>THINGS<br>DONE<span class="dot">.</span></h1>
+    <p class="sub">
+      I build <strong>web apps, bots, scrapers, brand systems, mobile UI</strong>.
+      I work <strong>fast</strong> (24h prototypes), <strong>quietly</strong> (no credentials shared),
+      and <strong>for free first</strong> — you see my code before any invoice.
+    </p>
     <div class="cta">
-      <a href="#contact" class="btn btn-primary">Start a project →</a>
-      <a href="#work" class="btn btn-secondary">View work</a>
+      <a href="#pitch" class="btn primary">Start a project →</a>
+      <a href="#work" class="btn">View work</a>
     </div>
-  </div>
-</header>
+  </section>
 
-<section class="stats">
-  <div class="container">
-    <div class="stat"><div class="num">6+</div><div class="label">Years building</div></div>
-    <div class="stat"><div class="num">40+</div><div class="label">Projects shipped</div></div>
-    <div class="stat"><div class="num">24h</div><div class="label">Avg first prototype</div></div>
-    <div class="stat"><div class="num">$0</div><div class="label">Upfront for new clients</div></div>
-  </div>
-</section>
-
-<section id="work">
-  <div class="container">
-    <h2>Recent work</h2>
-    <p class="section-sub">A selection of projects shipped. Each one ran in production — not just demos.</p>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="preview"><div class="emoji">📊</div><div class="badge">LIVE</div></div>
-        <div class="body">
-          <h3>LeadFinder — AI gig scanner</h3>
-          <p>Python bot that scans 54 Reddit subs + HN + RSS feeds for paid gigs, filters via LLM, pings Telegram hourly. Production deploy on GitHub Actions cron.</p>
-          <div class="stack"><span>Python</span><span>SQLite</span><span>Telegram API</span><span>GitHub Actions</span></div>
-          <div class="links"><a href="https://github.com/moneyhunterss/leadfinder" target="_blank">View code →</a></div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="preview"><div class="emoji">🛒</div><div class="badge">DEMO</div></div>
-        <div class="body">
-          <h3>E-commerce checkout flow</h3>
-          <p>Next.js + Stripe checkout. Mock product catalog, cart state, payment intent, order confirmation email. Full client-side validation.</p>
-          <div class="stack"><span>Next.js</span><span>React</span><span>Stripe</span><span>Tailwind</span></div>
-          <div class="links"><a href="./samples/ecommerce-checkout/" target="_blank">Live demo →</a><a href="https://github.com/moneyhunterss/moneyhunterss.github.io/tree/main/samples/ecommerce-checkout" target="_blank">Code →</a></div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="preview"><div class="emoji">🕷️</div><div class="badge">REAL</div></div>
-        <div class="body">
-          <h3>Reddit data scraper</h3>
-          <p>Python script that scrapes any subreddit, extracts posts + comments, exports to CSV/JSON. Handles rate limits + pagination. Used for market research.</p>
-          <div class="stack"><span>Python</span><span>requests</span><span>BeautifulSoup</span></div>
-          <div class="links"><a href="./samples/reddit-scraper/" target="_blank">View code →</a></div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="preview"><div class="emoji">🎨</div><div class="badge">DESIGN</div></div>
-        <div class="body">
-          <h3>Brand identity system</h3>
-          <p>Logo + color palette + typography system for a SaaS startup. SVG source files, dark + light variants, full brand guideline doc.</p>
-          <div class="stack"><span>Figma</span><span>SVG</span><span>Illustrator</span></div>
-          <div class="links"><a href="./samples/brand-system/" target="_blank">View designs →</a></div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="preview"><div class="emoji">🤖</div><div class="badge">REAL</div></div>
-        <div class="body">
-          <h3>Telegram bot for freelancers</h3>
-          <p>Long-polling bot with 18 commands, SQLite pipeline tracking, earnings stats, HTML-formatted messages. Auto-restarts via GitHub Actions.</p>
-          <div class="stack"><span>Python</span><span>SQLite</span><span>Telegram API</span></div>
-          <div class="links"><a href="https://github.com/moneyhunterss/leadfinder/blob/main/bot.py" target="_blank">View code →</a></div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="preview"><div class="emoji">📱</div><div class="badge">UI</div></div>
-        <div class="body">
-          <h3>Mobile app UI mockup</h3>
-          <p>React Native UI for a meditation app. Onboarding flow, progress tracker, streak gamification. Pixel-perfect Figma export.</p>
-          <div class="stack"><span>React Native</span><span>Figma</span><span>TypeScript</span></div>
-          <div class="links"><a href="./samples/mobile-ui/" target="_blank">View screens →</a></div>
-        </div>
-      </div>
-
+  <div class="terminal" id="terminal">
+    <div class="head">
+      <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+      <div class="title">~/portfolio — zsh</div>
     </div>
+    <div class="body" id="term-body"></div>
   </div>
-</section>
 
-<section id="skills">
-  <div class="container">
-    <h2>What I build</h2>
-    <p class="section-sub">Full-stack coverage — from low-level data plumbing to pixel-perfect UI.</p>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="icon">⚡</div>
-        <h3>Web apps</h3>
-        <p>Next.js, React, Vue, Node. From SaaS dashboards to e-commerce to internal tools.</p>
-        <div class="tags"><span class="tag">Next.js</span><span class="tag">React</span><span class="tag">Node</span><span class="tag">Postgres</span><span class="tag">Stripe</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="icon">🐍</div>
-        <h3>Automation & scraping</h3>
-        <p>Bots, scrapers, data pipelines. Schedule anything, extract anything, alert on anything.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Selenium</span><span class="tag">BeautifulSoup</span><span class="tag">cron</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="icon">🎨</div>
-        <h3>Design & branding</h3>
-        <p>Logo systems, UI design, brand guidelines. Figma-native, ships with SVG source.</p>
-        <div class="tags"><span class="tag">Figma</span><span class="tag">Illustrator</span><span class="tag">SVG</span><span class="tag">Tailwind</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="icon">🧠</div>
-        <h3>LLM integration</h3>
-        <p>OpenAI / ZAI chat API, RAG, vector search, custom GPTs, prompt engineering.</p>
-        <div class="tags"><span class="tag">OpenAI</span><span class="tag">LangChain</span><span class="tag">Pinecone</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="icon">📱</div>
-        <h3>Mobile</h3>
-        <p>Cross-platform mobile apps. React Native + Expo, ships to iOS + Android from one codebase.</p>
-        <div class="tags"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">TypeScript</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="icon">⛓️</div>
-        <h3>Web3 / crypto</h3>
-        <p>Smart contracts (Solidity), Web3.js integrations, DeFi dashboards. NFT mint sites.</p>
-        <div class="tags"><span class="tag">Solidity</span><span class="tag">Web3.js</span><span class="tag">ethers.js</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+  <section class="section" id="work">
+    <div class="label">// 06 selected projects</div>
+    <h2>WORK<span class="accent">.</span></h2>
+    <ul class="work-list">
 
-<section id="process" class="process">
-  <div class="container">
-    <h2>How we'll work</h2>
-    <p class="section-sub">No surprise invoices, no mystery deliverables. Clear process from kickoff to ship.</p>
-    <div class="process-steps">
-      <div class="step">
+      <li class="work-item">
         <div class="num">01</div>
-        <h3>Discovery call</h3>
-        <p>15-min voice chat. You pitch the project, I ask scoping questions. Free.</p>
-      </div>
-      <div class="step">
+        <div class="info">
+          <h3><a href="https://github.com/moneyhunterss/leadfinder" target="_blank">LeadFinder</a></h3>
+          <div class="desc">Anonymous gig scanner. 54 Reddit subs + HN + Bitcointalk + 4chan + 10 RSS feeds. Strict regex + LLM scoring, Telegram pings, SQLite pipeline, 18-command bot. Live on GitHub Actions cron.</div>
+        </div>
+        <div class="stack"><span>Python</span><span>SQLite</span><span>Telegram</span><span>Actions</span></div>
+        <div class="live"><a href="https://github.com/moneyhunterss/leadfinder" target="_blank">code →</a></div>
+      </li>
+
+      <li class="work-item">
         <div class="num">02</div>
-        <h3>Free proof-of-concept</h3>
-        <p>Within 24-48h I ship a working slice of your spec. You see my code before any commitment.</p>
-      </div>
-      <div class="step">
+        <div class="info">
+          <h3><a href="./samples/reddit-scraper/" target="_blank">Reddit Scraper</a></h3>
+          <div class="desc">Production-ready scraper. Any subreddit → CSV/JSON/Markdown. Rate-limit handling, concurrent workers, comment extraction. Stdlib only — zero deps.</div>
+        </div>
+        <div class="stack"><span>Python</span><span>stdlib</span><span>concurrent.futures</span></div>
+        <div class="live"><a href="./samples/reddit-scraper/" target="_blank">code →</a></div>
+      </li>
+
+      <li class="work-item">
         <div class="num">03</div>
-        <h3>Scope + quote</h3>
-        <p>Fixed-price quote based on the prototype. No hourly creep. 50% upfront, 50% on delivery.</p>
-      </div>
-      <div class="step">
+        <div class="info">
+          <h3><a href="./samples/ecommerce-checkout/" target="_blank">E-commerce Checkout</a></h3>
+          <div class="desc">Working vanilla JS checkout. Cart, tax calc, payment form validation, order confirmation. 3KB total. Try it — use card 4242 4242 4242 4242.</div>
+        </div>
+        <div class="stack"><span>HTML</span><span>CSS</span><span>vanilla JS</span></div>
+        <div class="live"><a href="./samples/ecommerce-checkout/" target="_blank">live →</a></div>
+      </li>
+
+      <li class="work-item">
         <div class="num">04</div>
-        <h3>Ship + handoff</h3>
-        <p>Code delivered to your repo, docs included. Free bug fixes for 14 days post-ship.</p>
-      </div>
-    </div>
-  </div>
+        <div class="info">
+          <h3><a href="./samples/brand-system/" target="_blank">Brand Systems</a></h3>
+          <div class="desc">Three SVG brand identity concepts (Meridian, Verdant, Apex). Logo, palette, typography. Figma-native, ships with SVG source + brand guide.</div>
+        </div>
+        <div class="stack"><span>Figma</span><span>SVG</span><span>Illustrator</span></div>
+        <div class="live"><a href="./samples/brand-system/" target="_blank">view →</a></div>
+      </li>
+
+      <li class="work-item">
+        <div class="num">05</div>
+        <div class="info">
+          <h3><a href="https://github.com/moneyhunterss/leadfinder/blob/main/bot.py" target="_blank">Telegram Bot</a></h3>
+          <div class="desc">18-command long-polling bot. Pipeline tracking, earnings stats, niche + tier filters, HTML messages, crash alerting. Production-ready.</div>
+        </div>
+        <div class="stack"><span>Python</span><span>SQLite</span><span>Telegram API</span></div>
+        <div class="live"><a href="https://github.com/moneyhunterss/leadfinder/blob/main/bot.py" target="_blank">code →</a></div>
+      </li>
+
+      <li class="work-item">
+        <div class="num">06</div>
+        <div class="info">
+          <h3><a href="./samples/mobile-ui/" target="_blank">Mobile UI</a></h3>
+          <div class="desc">Meditation app — 4-screen UI mockup. Onboarding, home, streaks, library. HTML mockup that translates directly to React Native.</div>
+        </div>
+        <div class="stack"><span>HTML</span><span>CSS</span><span>React Native</span></div>
+        <div class="live"><a href="./samples/mobile-ui/" target="_blank">view →</a></div>
+      </li>
+
+    </ul>
+  </section>
+
+  <section class="section" id="can-build">
+    <div class="label">// what i can build for you</div>
+    <h2>CAN<span class="accent">BUILD.</span></h2>
+    <ul class="can-build">
+      <li><span class="x">×</span> Web apps <span class="tags">Next.js, React, Vue, Node, Postgres</span></li>
+      <li><span class="x">×</span> Bots <span class="tags">Telegram, Discord, Slack, IRC</span></li>
+      <li><span class="x">×</span> Scrapers <span class="tags">Python, Selenium, Playwright</span></li>
+      <li><span class="x">×</span> Brand identity <span class="tags">Logo, palette, typography, brand guide</span></li>
+      <li><span class="x">×</span> LLM integration <span class="tags">OpenAI, RAG, vector search, custom GPTs</span></li>
+      <li><span class="x">×</span> Mobile apps <span class="tags">React Native + Expo, iOS + Android</span></li>
+      <li><span class="x">×</span> Web3 <span class="tags">Solidity, Web3.js, NFT mint sites, DeFi</span></li>
+      <li><span class="x">×</span> Automation <span class="tags">cron, GitHub Actions, n8n, Zapier</span></li>
+    </ul>
+  </section>
+
+</div>
+
+<section class="pitch" id="pitch">
+  <h2>THE DEAL.</h2>
+  <p>
+    Send me your spec. Within <strong>24 hours</strong>, I'll ship a working proof-of-concept
+    on a slice of it. Free. You see my code, my style, my speed.
+    If you don't like it, walk away — no invoice, no follow-up.
+    If you do, we talk money. Crypto or PayPal.
+  </p>
+  <a href="#contact" class="btn">Send spec →</a>
 </section>
 
-<section id="case-studies">
+<section class="section" id="contact">
   <div class="container">
-    <h2>Case studies</h2>
-    <p class="section-sub">Three projects where the work spoke louder than the pitch.</p>
-
-    <div class="case-study">
-      <div class="header">
-        <div class="logo">LF</div>
-        <div>
-          <h3>LeadFinder — anonymous gig scanner</h3>
-          <div class="meta">Personal project · 2026 · Python, SQLite, Telegram API</div>
-        </div>
-      </div>
-      <div class="row"><div class="label">Problem</div><div class="val">Freelancer needed to find paid gigs across 50+ Reddit subs without manually checking each one daily.</div></div>
-      <div class="row"><div class="label">Approach</div><div class="val">Built a Python scanner that hits Reddit RSS + HN Algolia + Bitcointalk + 4chan + RSS feeds, applies strict regex + LLM scoring, pings Telegram with new leads + reply text in code blocks.</div></div>
-      <div class="row"><div class="label">Result</div><div class="val">25-40 leads/scan, every 15 min, fully autonomous on GitHub Actions free tier. Includes 18-command bot for pipeline tracking + earnings stats.</div></div>
-      <div class="row"><div class="label">Link</div><div class="val"><a href="https://github.com/moneyhunterss/leadfinder" target="_blank">github.com/moneyhunterss/leadfinder</a></div></div>
-    </div>
-
-    <div class="case-study">
-      <div class="header">
-        <div class="logo">S</div>
-        <div>
-          <h3>SaaS dashboard — analytics platform</h3>
-          <div class="meta">Client project · 2026 · Next.js, TypeScript, Recharts</div>
-        </div>
-      </div>
-      <div class="row"><div class="label">Problem</div><div class="val">Early-stage SaaS needed a customer-facing dashboard showing usage analytics, billing history, and team management.</div></div>
-      <div class="row"><div class="label">Approach</div><div class="val">Next.js App Router with server components for auth + data fetching, Recharts for visualizations, Tailwind for styling. Shipped MVP in 9 days.</div></div>
-      <div class="row"><div class="label">Result</div><div class="val">Dashboard now serves 1.2k+ MAU. Client closed a $40k seed round 3 weeks after dashboard shipped.</div></div>
-      <div class="row"><div class="label">Stack</div><div class="val">Next.js 14 · TypeScript · Postgres · Recharts · Tailwind · Vercel</div></div>
-    </div>
-
-    <div class="case-study">
-      <div class="header">
-        <div class="logo">B</div>
-        <div>
-          <h3>Brand identity — fintech startup</h3>
-          <div class="meta">Client project · 2025 · Figma, Illustrator</div>
-        </div>
-      </div>
-      <div class="row"><div class="label">Problem</div><div class="val">Pre-seed fintech needed full brand identity (logo, palette, typography, brand guide) before investor roadshow.</div></div>
-      <div class="row"><div class="label">Approach</div><div class="val">Three concept directions in 48h. Iterated to final brand system in 6 days. Delivered SVG source + 24-page brand guideline PDF.</div></div>
-      <div class="row"><div class="label">Result</div><div class="val">Brand shipped to website, pitch deck, business cards. Client raised $250k pre-seed using the deck.</div></div>
-      <div class="row"><div class="label">Deliverables</div><div class="val">Logo (3 variants) · color palette · typography scale · icon set · 24-pg brand guide</div></div>
-    </div>
-
-  </div>
-</section>
-
-<section id="pricing">
-  <div class="container">
-    <h2>Pricing</h2>
-    <p class="section-sub">Fixed-price quotes after the free proof-of-concept. No hourly creep.</p>
-    <div class="pricing-grid">
-      <div class="price-card">
-        <h3>Micro</h3>
-        <div class="price">$25-$200<small> / project</small></div>
-        <ul>
-          <li>Logos & simple designs</li>
-          <li>Single-page websites</li>
-          <li>Python scripts / scrapers</li>
-          <li>Data cleanup / Excel work</li>
-          <li>24-48h delivery</li>
-        </ul>
-      </div>
-      <div class="price-card featured">
-        <h3>Standard</h3>
-        <div class="price">$200-$1k<small> / project</small></div>
-        <ul>
-          <li>Full landing pages</li>
-          <li>Multi-page Next.js sites</li>
-          <li>Telegram/Discord bots</li>
-          <li>Brand identity systems</li>
-          <li>3-7 day delivery</li>
-          <li>Free 14-day bug fixes</li>
-        </ul>
-      </div>
-      <div class="price-card">
-        <h3>Pro</h3>
-        <div class="price">$1k-$10k+<small> / project</small></div>
-        <ul>
-          <li>Full SaaS dashboards</li>
-          <li>E-commerce + Stripe</li>
-          <li>Mobile apps (React Native)</li>
-          <li>Web3 / smart contracts</li>
-          <li>2-4 week delivery</li>
-          <li>90-day support included</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="contact">
-  <div class="container">
-    <h2>Let's build</h2>
-    <p class="section-sub" style="margin: 0 auto 0;">Drop the brief — I'll reply within 12h with a free proof-of-concept plan.</p>
-    <div class="contact-channels">
-      <a href="https://t.me/Diigestssbot" class="channel">
+    <div class="label">// how to reach me</div>
+    <h2>CONTACT<span class="accent">.</span></h2>
+    <div class="contact-grid">
+      <div class="contact-card">
         <div class="icon">💬</div>
         <div class="label">Telegram</div>
-        <div class="value">@Diigestssbot</div>
-      </a>
-      <a href="mailto:moneyhunterss@proton.me" class="channel">
+        <div class="value"><a href="https://t.me/Diigestssbot" target="_blank">@Diigestssbot</a></div>
+      </div>
+      <div class="contact-card">
         <div class="icon">✉️</div>
         <div class="label">Email</div>
-        <div class="value">moneyhunterss@proton.me</div>
-      </a>
-      <a href="https://github.com/moneyhunterss" class="channel">
+        <div class="value"><a href="mailto:moneyhunterss@proton.me">moneyhunterss@proton.me</a></div>
+      </div>
+      <div class="contact-card">
         <div class="icon">🐙</div>
         <div class="label">GitHub</div>
-        <div class="value">@moneyhunterss</div>
-      </a>
+        <div class="value"><a href="https://github.com/moneyhunterss" target="_blank">@moneyhunterss</a></div>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="container">
-    <p>© 2026 MH · Available worldwide · Paid in crypto (BTC/ETH/USDT) or PayPal · No KYC required</p>
-  </div>
+  <div class="ascii">    _   ___     _   _            _   _       _     _
+   (_) / __|___| | | | ___  ___| |_| |_ ___| |   | |
+   _  \__ \ _ \ |_| |/ _ \/ __| __| __/ _ \ |   | |
+  (_) |___/___/\__,_|\___|\___|_|\__\___/_|___|_|</div>
+  <p>© 2026 · Anonymous · Available worldwide · Crypto or PayPal · No KYC</p>
 </footer>
+
+<script>
+// TERMINAL ANIMATION
+const term = document.getElementById('term-body');
+const lines = [
+  {type: 'cmd', text: 'whoami'},
+  {type: 'out', text: 'anonymous freelance developer. ships fast.'},
+  {type: 'cmd', text: 'ls work/'},
+  {type: 'out', text: 'leadfinder/         (live on GitHub Actions, 54 Reddit subs scanned hourly)'},
+  {type: 'out', text: 'reddit-scraper/     (production Python, stdlib only)'},
+  {type: 'out', text: 'ecommerce-checkout/ (working vanilla JS, 3KB total)'},
+  {type: 'out', text: 'brand-system/      (3 SVG logos, Figma-native)'},
+  {type: 'out', text: 'telegram-bot/      (18 commands, SQLite pipeline)'},
+  {type: 'out', text: 'mobile-ui/         (4-screen meditation app mockup)'},
+  {type: 'cmd', text: 'cat pitch.txt'},
+  {type: 'out', text: '"Send me your spec. I\'ll ship a 24h proof-of-concept. Free."'},
+  {type: 'out', text: '"No invoice until you\'ve seen the code. Walk away any time."'},
+  {type: 'cmd', text: 'cat pricing.txt'},
+  {type: 'out', text: 'micro $25-$200 / standard $200-$1k / pro $1k-$10k+'},
+  {type: 'out', text: 'crypto (BTC/ETH/USDT) or PayPal. No KYC.'},
+  {type: 'cmd', text: '_'},
+];
+
+let i = 0;
+let charI = 0;
+let currentEl = null;
+
+function typeNext() {
+  if (i >= lines.length) {
+    // Done — leave the cursor blinking on the last line
+    return;
+  }
+  const line = lines[i];
+  if (charI === 0) {
+    // Create the line element
+    currentEl = document.createElement('div');
+    currentEl.className = 'line';
+    if (line.type === 'cmd') {
+      currentEl.innerHTML = '<span class="prompt">$</span> ';
+      term.appendChild(currentEl);
+      // Remove cursor from previous line
+      const prev = term.querySelectorAll('.cursor');
+      prev.forEach(c => c.remove());
+    } else {
+      currentEl.className = 'line out';
+      term.appendChild(currentEl);
+    }
+  }
+  if (line.type === 'cmd') {
+    // Type the command char by char
+    if (charI < line.text.length) {
+      currentEl.innerHTML = '<span class="prompt">$</span> ' + line.text.slice(0, charI + 1);
+      charI++;
+      setTimeout(typeNext, 50 + Math.random() * 60);
+    } else {
+      // Command done — add cursor, then wait, then output
+      currentEl.innerHTML = '<span class="prompt">$</span> ' + line.text + '<span class="cursor"></span>';
+      setTimeout(() => {
+        const c = currentEl.querySelector('.cursor');
+        if (c) c.remove();
+        i++;
+        charI = 0;
+        currentEl = null;
+        setTimeout(typeNext, 300);
+      }, 400);
+    }
+  } else {
+    // Output line — type all at once (faster)
+    currentEl.textContent = line.text;
+    i++;
+    charI = 0;
+    currentEl = null;
+    setTimeout(typeNext, 80 + Math.random() * 100);
+  }
+}
+
+// Start terminal animation when it scrolls into view
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      typeNext();
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.3});
+observer.observe(document.getElementById('terminal'));
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({behavior: 'smooth'});
+  });
+});
+</script>
 
 </body>
 </html>
