@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MH. — Product Systems & Video Pipelines</title>
+<meta name="description" content="Product systems and video pipelines. Selected work, 2021—2025.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0D0F;
+    --bg-2:#101013;
+    --bg-3:#0A0A0C;
+    --text:#D4D4D8;
+    --dim:#8A8A93;
+    --faint:#4A4A52;
+    --ghost:#2A2A30;
+    --accent:#38BDF8;
+    --accent-dim:rgba(56,189,248,0.10);
+    --orange:#FB923C;
+    --orange-dim:rgba(251,146,60,0.12);
+    --border:#1A1A1E;
+    --border-2:#27272A;
+    --green:#22C55E;
+    --green-dim:rgba(34,197,94,0.13);
+    --yellow:#EAB308;
+    --yellow-dim:rgba(234,179,8,0.13);
+    --red:#EF4444;
+    --red-dim:rgba(239,68,68,0.13);
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    font-feature-settings:"tnum" 1,"cv11" 1;
+    line-height:1.55;
+    font-size:15px;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(56,189,248,0.25);color:#fff}
+  .mono{font-family:var(--mono);font-feature-settings:"tnum" 1}
+  .dim{color:var(--dim)}
+  .faint{color:var(--faint)}
+  .accent{color:var(--accent)}
+  .orange{color:var(--orange)}
+  .tnum{font-feature-settings:"tnum" 1}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+
+  /* ── status bar ── */
+  .statusbar{
+    position:sticky;top:0;z-index:60;
+    background:rgba(13,13,15,0.88);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--dim);
+  }
+  .statusbar .inner{
+    max-width:1080px;margin:0 auto;
+    padding:8px 32px;
+    display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  }
+  .statusbar .sdot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--green);box-shadow:0 0 6px rgba(34,197,94,0.7);
+    flex-shrink:0;
+  }
+  .statusbar .sep{color:var(--ghost)}
+  .statusbar .path{color:var(--text)}
+  .statusbar .right{margin-left:auto;color:var(--faint);display:flex;gap:14px}
+
+  /* ── header ── */
+  header.site{padding:72px 0 56px;border-bottom:1px solid var(--border)}
+  .mh{
+    font-family:var(--mono);
+    font-size:54px;font-weight:600;
+    letter-spacing:-0.03em;line-height:1;
+    color:var(--text);
+    display:inline-flex;align-items:flex-end;
+  }
+  .cursor{
+    display:inline-block;
+    width:0.5ch;height:0.78em;
+    background:var(--accent);
+    margin-left:6px;margin-bottom:6px;
+    animation:blink 1.05s steps(2,end) infinite;
+  }
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  .intro{
+    margin-top:28px;font-size:17px;color:var(--text);
+    max-width:580px;line-height:1.5;
+  }
+  .intro .em{color:var(--accent)}
+
+  /* ── projects ── */
+  main{padding:4px 0 96px}
+  .project{
+    padding:56px 0 56px 26px;
+    margin-left:-26px;
+    border-left:2px solid transparent;
+    border-bottom:1px solid var(--border);
+    transition:border-color .18s ease;
+  }
+  .project:hover{border-left-color:var(--accent)}
+  .project:last-child{border-bottom:none}
+
+  .proj-head{
+    display:flex;align-items:baseline;gap:16px;
+    margin-bottom:22px;flex-wrap:wrap;
+  }
+  .proj-num{
+    font-family:var(--mono);font-size:12px;
+    color:var(--dim);letter-spacing:0.06em;
+  }
+  .proj-title{
+    font-size:23px;font-weight:600;
+    letter-spacing:-0.015em;color:var(--text);
+  }
+  .proj-path{
+    font-family:var(--mono);font-size:11.5px;
+    color:var(--faint);margin-left:auto;
+  }
+
+  .outcome{
+    font-size:16.5px;color:var(--text);
+    margin-bottom:16px;padding-left:14px;
+    border-left:2px solid var(--accent);
+    line-height:1.5;
+  }
+  .outcome .n{color:var(--accent);font-feature-settings:"tnum"}
+  .work{
+    font-size:14.5px;color:var(--dim);
+    max-width:700px;margin-bottom:20px;
+    line-height:1.6;
+  }
+  .work .hl{color:var(--text)}
+
+  .stack{
+    font-family:var(--mono);font-size:11.5px;
+    color:var(--faint);margin-bottom:28px;
+    letter-spacing:0.02em;display:flex;flex-wrap:wrap;gap:0;
+  }
+  .stack .lbl{color:var(--dim);margin-right:10px}
+  .stack .item{color:var(--text)}
+  .stack .item::after{content:"  ·";color:var(--faint);margin:0 8px 0 4px}
+  .stack .item:last-child::after{content:""}
+
+  /* ── demo shell ── */
+  .demo{
+    border:1px solid var(--border);
+    background:var(--bg-2);
+    border-radius:2px;overflow:hidden;
+  }
+  .demo-bar{
+    display:flex;align-items:center;gap:12px;
+    padding:9px 14px;
+    border-bottom:1px solid var(--border);
+    background:var(--bg-3);
+    font-family:var(--mono);font-size:11px;color:var(--dim);
+  }
+  .demo-bar .dots{display:flex;gap:6px}
+  .demo-bar .dots i{width:8px;height:8px;border-radius:50%;background:var(--border-2);display:block}
+  .demo-bar .dtitle{color:var(--text)}
+  .demo-bar .tag{margin-left:auto;color:var(--faint)}
+  .demo-body{padding:28px}
+
+  /* ── 01 video demo ── */
+  .video-grid{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:28px;align-items:center;
+  }
+  .vcell .vlabel{
+    font-family:var(--mono);font-size:10.5px;
+    color:var(--faint);letter-spacing:0.1em;
+    margin-bottom:10px;display:flex;align-items:center;gap:8px;
+  }
+  .vcell .vlabel::before{content:"";width:8px;height:1px;background:var(--accent)}
+  .vinput{
+    aspect-ratio:16/9;background:#08080A;
+    border:1px solid var(--border-2);
+    position:relative;border-radius:2px;overflow:hidden;
+  }
+  .vinput .meta{
+    position:absolute;top:8px;left:10px;
+    font-family:var(--mono);font-size:10px;color:var(--dim);
+    display:flex;gap:8px;align-items:center;
+  }
+  .vinput .meta .sz{color:var(--faint)}
+  .vinput .wave{
+    position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+    height:62px;display:block;
+  }
+  .vinput .tcode{
+    position:absolute;bottom:8px;right:10px;
+    font-family:var(--mono);font-size:10px;color:var(--orange);
+  }
+  .vinput .tcode::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--orange);margin-right:5px;vertical-align:middle;animation:recpulse 1.2s ease-in-out infinite}
+  @keyframes recpulse{0%,100%{opacity:1}50%{opacity:0.25}}
+
+  .arrow-col{
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    color:var(--faint);
+  }
+  .arrow-col svg{display:block}
+  .arrow-col .alab{
+    font-family:var(--mono);font-size:10px;color:var(--orange);
+    letter-spacing:0.04em;white-space:nowrap;
+  }
+
+  .voutput{
+    width:160px;height:284px;margin:0 auto;
+    background:linear-gradient(165deg,#1a1a22 0%,#0a0a0e 55%,#060608 100%);
+    border:1px solid var(--border-2);
+    position:relative;border-radius:2px;overflow:hidden;
+  }
+  .voutput::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,0.22) 0,rgba(0,0,0,0.22) 1px,transparent 1px,transparent 3px);
+    mix-blend-mode:multiply;z-index:5;
+  }
+  .voutput .rec{
+    position:absolute;top:9px;left:10px;z-index:6;
+    font-family:var(--mono);font-size:9.5px;color:#fff;
+    display:flex;align-items:center;gap:4px;letter-spacing:0.05em;
+  }
+  .voutput .rec i{width:6px;height:6px;border-radius:50%;background:var(--red);animation:recpulse 1.2s ease-in-out infinite}
+  .voutput .cap{
+    position:absolute;left:10px;right:10px;bottom:64px;z-index:6;
+    font-family:var(--sans);font-weight:700;font-size:15px;
+    color:#fff;text-transform:lowercase;line-height:1.18;
+    text-shadow:0 1px 4px rgba(0,0,0,0.6);
+    letter-spacing:-0.01em;
+  }
+  .voutput .cap .kw{color:var(--orange)}
+  .voutput .prog{
+    position:absolute;left:10px;right:10px;bottom:14px;z-index:6;
+  }
+  .voutput .pbar{
+    height:3px;background:rgba(255,255,255,0.15);border-radius:2px;overflow:hidden;
+  }
+  .voutput .pbar i{display:block;height:100%;width:60%;background:var(--orange);border-radius:2px}
+  .voutput .ptime{
+    margin-top:6px;font-family:var(--mono);font-size:9.5px;
+    color:#fff;display:flex;justify-content:space-between;
+  }
+
+  /* ── 02 dashboard ── */
+  .chart-hd{
+    display:flex;align-items:baseline;justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .chart-hd .t{font-size:13px;color:var(--text);font-weight:500}
+  .chart-hd .s{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .chart-wrap{position:relative;width:100%}
+  .chart-wrap svg{display:block;width:100%;height:auto}
+  .gridline{stroke:var(--border);stroke-width:1;shape-rendering:crispEdges}
+  .axislbl{font-family:var(--mono);font-size:9.5px;fill:var(--faint)}
+  .mrr-area{fill:rgba(56,189,248,0.06)}
+  .mrr-line{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+  .mrr-pt{fill:var(--bg-2);stroke:var(--accent);stroke-width:1.5}
+  .dip-pt{fill:var(--orange);stroke:var(--bg-2);stroke-width:2}
+  .dip-annot{font-family:var(--mono);font-size:10px;fill:var(--orange)}
+
+  .heat-section{margin-top:30px;padding-top:24px;border-top:1px solid var(--border)}
+  .heat-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+  .heat-hd .t{font-size:13px;color:var(--text);font-weight:500}
+  .heat-hd .s{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .heat-hd .legend{display:flex;gap:10px;font-family:var(--mono);font-size:9.5px;color:var(--faint)}
+  .heat-hd .legend i{display:inline-block;width:9px;height:9px;border-radius:1px;margin-right:4px;vertical-align:middle}
+
+  .heatmap{
+    display:grid;
+    grid-template-columns:48px repeat(4,1fr);
+    gap:3px;font-family:var(--mono);
+  }
+  .heatmap .hcell{
+    aspect-ratio:1.6/1;display:flex;align-items:center;justify-content:center;
+    font-size:11px;border-radius:1px;
+    border:1px solid var(--border);
+  }
+  .heatmap .hcol{color:var(--faint);font-size:10px;background:var(--bg-3)}
+  .heatmap .hrow{color:var(--faint);font-size:10px;background:var(--bg-3);align-items:center;justify-content:flex-start;padding-left:6px}
+  .c-base{background:var(--bg-3);color:var(--dim)}
+  .c-green{background:var(--green-dim);color:var(--green);border-color:rgba(34,197,94,0.25)}
+  .c-yellow{background:var(--yellow-dim);color:var(--yellow);border-color:rgba(234,179,8,0.25)}
+  .c-red{background:var(--red-dim);color:var(--red);border-color:rgba(239,68,68,0.3)}
+  .c-flag{outline:1px solid var(--orange);outline-offset:-1px}
+
+  .statbar{
+    margin-top:24px;padding:14px 18px;
+    border:1px solid var(--border);background:var(--bg-3);
+    display:flex;gap:0;flex-wrap:wrap;
+    font-family:var(--mono);font-size:12px;
+  }
+  .statbar .stat{flex:1;min-width:120px;padding-right:18px}
+  .statbar .stat .k{color:var(--faint);font-size:10px;letter-spacing:0.05em;margin-bottom:3px}
+  .statbar .stat .v{color:var(--text);font-size:15px;font-weight:500}
+  .statbar .stat .v.bad{color:var(--red)}
+  .statbar .stat .v.good{color:var(--green)}
+
+  /* ── 03 vault ── */
+  .vault-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--mono);font-size:10.5px;
+    padding:4px 9px;border:1px solid var(--border-2);
+    color:var(--accent);border-radius:2px;
+    letter-spacing:0.05em;margin-bottom:20px;
+  }
+  .vault-badge i{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green)}
+  .enc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px}
+  .enc-col .clab{
+    font-family:var(--mono);font-size:10px;color:var(--faint);
+    letter-spacing:0.1em;margin-bottom:8px;display:flex;align-items:center;gap:8px;
+  }
+  .enc-col .clab::before{content:"";width:8px;height:1px;background:var(--accent)}
+  .enc-input{
+    width:100%;background:var(--bg-3);
+    border:1px solid var(--border-2);color:var(--text);
+    font-family:var(--sans);font-size:14px;
+    padding:11px 13px;border-radius:2px;outline:none;
+    transition:border-color .15s;
+  }
+  .enc-input:focus{border-color:var(--accent)}
+  .enc-input::placeholder{color:var(--faint)}
+  .enc-out{
+    width:100%;min-height:42px;background:var(--bg-3);
+    border:1px solid var(--border-2);color:var(--accent);
+    font-family:var(--mono);font-size:12.5px;
+    padding:11px 13px;border-radius:2px;
+    word-break:break-all;line-height:1.5;
+    display:flex;align-items:center;
+  }
+  .enc-out .ph{color:var(--faint)}
+  .enc-actions{display:flex;gap:10px;align-items:center;margin-bottom:28px}
+  .btn{
+    font-family:var(--mono);font-size:12px;
+    padding:8px 16px;border-radius:2px;cursor:pointer;
+    border:1px solid var(--border-2);background:var(--bg-3);
+    color:var(--text);letter-spacing:0.03em;
+    transition:all .14s ease;
+  }
+  .btn:hover{border-color:var(--accent);color:var(--accent)}
+  .btn.primary{background:var(--accent-dim);border-color:rgba(56,189,248,0.4);color:var(--accent)}
+  .btn.primary:hover{background:rgba(56,189,248,0.18)}
+  .enc-status{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .enc-status.ok{color:var(--green)}
+
+  .filelist-hd{
+    font-family:var(--mono);font-size:10px;color:var(--faint);
+    letter-spacing:0.1em;margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .filelist-hd::before{content:"";width:8px;height:1px;background:var(--accent)}
+  .filelist{border:1px solid var(--border)}
+  .filelist .frow{
+    display:grid;grid-template-columns:18px 1fr auto auto;gap:12px;
+    align-items:center;padding:9px 14px;
+    border-bottom:1px solid var(--border);
+    font-family:var(--mono);font-size:12px;
+    transition:background .12s;
+  }
+  .filelist .frow:last-child{border-bottom:none}
+  .filelist .frow:hover{background:var(--bg-3)}
+  .filelist .frow .lk{color:var(--accent)}
+  .filelist .frow .fn{color:var(--text)}
+  .filelist .frow .fs{color:var(--faint)}
+  .filelist .frow .fd{color:var(--faint);font-size:10.5px}
+
+  /* ── 04 brand ── */
+  .logo-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+    margin-bottom:30px;
+  }
+  .logo-cell{
+    border:1px solid var(--border);background:var(--bg-3);
+    padding:28px 18px 16px;text-align:center;
+    aspect-ratio:1.4/1;display:flex;flex-direction:column;
+    align-items:center;justify-content:space-between;
+    transition:border-color .14s;
+  }
+  .logo-cell:hover{border-color:var(--border-2)}
+  .logo-cell .lsvg{flex:1;display:flex;align-items:center;justify-content:center;width:100%}
+  .logo-cell .lsvg svg{max-width:75%;max-height:75%}
+  .logo-cell .llab{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:0.08em}
+  .brand-section-hd{
+    font-family:var(--mono);font-size:10px;color:var(--faint);
+    letter-spacing:0.1em;margin-bottom:12px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .brand-section-hd::before{content:"";width:8px;height:1px;background:var(--accent)}
+  .color-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:30px}
+  .swatch{
+    border:1px solid var(--border);overflow:hidden;border-radius:2px;
+  }
+  .swatch .schip{height:62px;border-bottom:1px solid var(--border)}
+  .swatch .smeta{padding:8px 11px;font-family:var(--mono);font-size:10.5px}
+  .swatch .smeta .hx{color:var(--text)}
+  .swatch .smeta .nm{color:var(--faint);font-size:9.5px;margin-top:2px}
+
+  .type-spec{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .spec-cell{
+    border:1px solid var(--border);background:var(--bg-3);
+    padding:24px;display:flex;align-items:center;gap:20px;
+  }
+  .spec-cell .gl{
+    font-family:var(--sans);font-size:64px;line-height:1;
+    color:var(--text);letter-spacing:-0.04em;
+  }
+  .spec-cell .gl.w4{font-weight:400}
+  .spec-cell .gl.w7{font-weight:700}
+  .spec-cell .gmeta{font-family:var(--mono);font-size:11px}
+  .spec-cell .gmeta .gn{color:var(--text);font-size:13px;margin-bottom:3px}
+  .spec-cell .gmeta .gw{color:var(--faint)}
+
+  /* ── 05 real estate ── */
+  .re-grid{display:grid;grid-template-columns:1fr 280px;gap:20px}
+  .listings{display:flex;flex-direction:column;gap:12px}
+  .listing{
+    border:1px solid var(--border);background:var(--bg-3);
+    padding:14px 16px;border-radius:2px;
+    transition:border-color .14s;position:relative;
+  }
+  .listing:hover{border-color:var(--border-2)}
+  .listing .ltop{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;
+  }
+  .listing .alert{
+    font-family:var(--mono);font-size:9.5px;
+    color:var(--orange);letter-spacing:0.06em;
+    display:flex;align-items:center;gap:5px;
+  }
+  .listing .alert i{width:6px;height:6px;border-radius:50%;background:var(--orange);box-shadow:0 0 5px var(--orange)}
+  .listing .ts{font-family:var(--mono);font-size:10px;color:var(--faint)}
+  .listing .addr{font-size:14px;color:var(--text);font-weight:500;margin-bottom:6px;letter-spacing:-0.005em}
+  .listing .price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .listing .price{font-family:var(--mono);font-size:18px;color:var(--text);font-weight:600}
+  .listing .below{font-family:var(--mono);font-size:11px;color:var(--orange)}
+  .listing .specs{font-family:var(--mono);font-size:11px;color:var(--dim);margin-bottom:8px}
+  .listing .spark{height:22px;width:100%;display:block}
+  .listing .spark svg{display:block;width:100%;height:100%}
+
+  .alerts-side{border:1px solid var(--border);background:var(--bg-3);padding:14px 0 6px;height:fit-content}
+  .alerts-side .ashd{
+    font-family:var(--mono);font-size:10.5px;color:var(--text);
+    letter-spacing:0.08em;padding:0 16px 12px;
+    border-bottom:1px solid var(--border);
+    display:flex;justify-content:space-between;
+  }
+  .alerts-side .ashd .cnt{color:var(--orange)}
+  .aitem{
+    padding:9px 16px;border-bottom:1px solid var(--border);
+    font-family:var(--mono);font-size:10.5px;line-height:1.45;
+  }
+  .aitem:last-child{border-bottom:none}
+  .aitem .atop{display:flex;justify-content:space-between;color:var(--faint);margin-bottom:2px}
+  .aitem .aaddr{color:var(--text);font-size:11px}
+  .aitem .adrop{color:var(--orange)}
+
+  /* ── footer ── */
+  footer.site{
+    padding:48px 0 64px;border-top:1px solid var(--border);
+    text-align:center;
+  }
+  footer.site .line{
+    width:120px;height:1px;background:var(--border-2);
+    margin:0 auto 20px;
+  }
+  footer.site .yr{
+    font-family:var(--mono);font-size:12px;
+    color:var(--faint);letter-spacing:0.1em;
+  }
+
+  /* ── responsive ── */
+  @media(max-width:760px){
+    .wrap{padding:0 20px}
+    .mh{font-size:40px}
+    .video-grid{grid-template-columns:1fr;gap:20px}
+    .arrow-col{transform:rotate(90deg)}
+    .enc-grid{grid-template-columns:1fr}
+    .logo-row{grid-template-columns:1fr}
+    .color-row{grid-template-columns:repeat(2,1fr)}
+    .type-spec{grid-template-columns:1fr}
+    .re-grid{grid-template-columns:1fr}
+    .statusbar .right{display:none}
+    .proj-path{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- status bar -->
+<div class="statusbar">
+  <div class="inner">
+    <span class="sdot"></span>
+    <span class="path">~/mh/portfolio</span>
+    <span class="sep">·</span>
+    <span>5 projects indexed</span>
+    <span class="sep">·</span>
+    <span>build: stable</span>
+    <span class="right">
+      <span>branch: main</span>
+      <span class="sep">·</span>
+      <span>2025</span>
+    </span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <div class="mh">MH.<span class="cursor"></span></div>
+    <p class="intro">I build product systems and video pipelines. The work below is real — <span class="em">you can interact with it.</span></p>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <!-- ═══════ 01 ═══════ -->
+  <section class="project">
+    <div class="proj-head">
+      <span class="proj-num">01</span>
+      <span class="proj-title">YouTube Shorts Factory</span>
+      <span class="proj-path">~/shorts_factory/</span>
+    </div>
+    <p class="outcome">Took a fitness channel from <span class="n">1.1%</span> to <span class="n">4.2%</span> CTR on Shorts. <span class="n">12M</span> views in <span class="n">90</span> days.</p>
+    <p class="work">Built a pipeline that ingests raw gym footage, detects hooks using audio peaks, auto-cuts to <span class="hl">15-second verticals</span>, burns in kinetic captions, and exports with platform-specific aspect ratios. The system processes a 20-minute video in 90 seconds and outputs 8–12 finished Shorts.</p>
+    <div class="stack">
+      <span class="lbl">stack:</span>
+      <span class="item">Python</span><span class="item">FFmpeg</span><span class="item">Whisper</span><span class="item">After Effects</span>
+    </div>
+
+    <div class="demo">
+      <div class="demo-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="dtitle">pipeline.sh — stage 04: export</span>
+        <span class="tag">run #1129</span>
+      </div>
+      <div class="demo-body">
+        <div class="video-grid">
+
+          <div class="vcell">
+            <div class="vlabel">INPUT · 16:9 source</div>
+            <div class="vinput">
+              <div class="meta"><span>raw_gym_session_04.mp4</span><span class="sz">— 22:14</span></div>
+              <svg class="wave" viewBox="0 0 300 62" preserveAspectRatio="none">
+                <g stroke="#38BDF8" stroke-width="1.4" fill="none" stroke-linejoin="round">
+                  <polyline points="0,31 8,29 14,18 20,40 26,14 32,44 38,20 44,38 50,16 56,42 62,24 68,36 74,12 80,46 86,22 92,40 98,18 104,44 110,28 116,34 122,14 128,42 134,20 140,38 146,16 152,44 158,26 164,36 170,18 176,40 182,14 188,46 194,22 200,38 206,16 212,42 218,28 224,34 230,12 236,44 242,20 248,40 254,18 260,38 266,22 272,34 278,16 284,42 290,26 296,32 300,30"/>
+                </g>
+                <g stroke="#FB923C" stroke-width="1" opacity="0.7">
+                  <line x1="74" y1="2" x2="74" y2="60"/>
+                  <line x1="188" y1="2" x2="188" y2="60"/>
+                </g>
+                <g fill="#FB923C" font-family="JetBrains Mono" font-size="7">
+                  <text x="78" y="10">hook 1</text>
+                  <text x="192" y="10">hook 2</text>
+                </g>
+              </svg>
+              <div class="tcode">00:14:32</div>
+            </div>
+          </div>
+
+          <div class="arrow-col">
+            <svg width="48" height="18" viewBox="0 0 48 18" fill="none">
+              <path d="M0 9 L42 9 M36 4 L42 9 L36 14" stroke="#4A4A52" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="alab">90s process</span>
+          </div>
+
+          <div class="vcell">
+            <div class="vlabel">OUTPUT · 9:16 vertical</div>
+            <div class="voutput">
+              <div class="rec"><i></i>REC</div>
+              <div class="cap">this exercise <span class="kw">changed</span> everything</div>
+              <div class="prog">
+                <div class="pbar"><i></i></div>
+                <div class="ptime"><span>0:09</span><span>0:15</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ 02 ═══════ -->
+  <section class="project">
+    <div class="proj-head">
+      <span class="proj-num">02</span>
+      <span class="proj-title">Churn Detection System</span>
+      <span class="proj-path">~/churn_analytics/</span>
+    </div>
+    <p class="outcome">Found a user segment hemorrhaging <span class="n">$340k/year</span>. Built the dashboard that caught it.</p>
+    <p class="work">Real-time analytics pipeline ingesting <span class="hl">2M+ events/day</span> from a B2B SaaS platform. Built cohort retention analysis, funnel tracking, and revenue attribution. The churn segment was visible within 48 hours of deployment — had been invisible for 2 years.</p>
+    <div class="stack">
+      <span class="lbl">stack:</span>
+      <span class="item">React</span><span class="item">ClickHouse</span><span class="item">Kafka</span><span class="item">D3.js</span>
+    </div>
+
+    <div class="demo">
+      <div class="demo-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="dtitle">churn_analysis_v2.sql</span>
+        <span class="tag">live · 2,341,892 events today</span>
+      </div>
+      <div class="demo-body">
+
+        <div class="chart-hd">
+          <span class="t">Monthly Recurring Revenue</span>
+          <span class="s">Jan 2024 — Dec 2024</span>
+        </div>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 620 230" preserveAspectRatio="none">
+            <!-- gridlines -->
+            <g>
+              <line class="gridline" x1="50" y1="20" x2="600" y2="20"/>
+              <line class="gridline" x1="50" y1="64" x2="600" y2="64"/>
+              <line class="gridline" x1="50" y1="107" x2="600" y2="107"/>
+              <line class="gridline" x1="50" y1="150" x2="600" y2="150"/>
+              <line class="gridline" x1="50" y1="193" x2="600" y2="193"/>
+            </g>
+            <!-- y labels -->
+            <g class="axislbl" text-anchor="end">
+              <text x="42" y="23">$145k</text>
+              <text x="42" y="67">$135k</text>
+              <text x="42" y="110">$125k</text>
+              <text x="42" y="153">$115k</text>
+              <text x="42" y="196">$105k</text>
+            </g>
+            <!-- x labels -->
+            <g class="axislbl" text-anchor="middle">
+              <text x="50" y="215">J</text>
+              <text x="98" y="215">F</text>
+              <text x="146" y="215">M</text>
+              <text x="195" y="215">A</text>
+              <text x="243" y="215">M</text>
+              <text x="291" y="215">J</text>
+              <text x="339" y="215">J</text>
+              <text x="387" y="215">A</text>
+              <text x="435" y="215">S</text>
+              <text x="484" y="215">O</text>
+              <text x="532" y="215">N</text>
+              <text x="580" y="215">D</text>
+            </g>
+            <!-- area -->
+            <path class="mrr-area" d="M50,165 L98,144 L146,122 L195,100 L243,82 L291,63 L339,42 L387,103 L435,85 L484,63 L532,42 L580,29 L580,193 L50,193 Z"/>
+            <!-- line -->
+            <path class="mrr-line" d="M50,165 L98,144 L146,122 L195,100 L243,82 L291,63 L339,42 L387,103 L435,85 L484,63 L532,42 L580,29"/>
+            <!-- normal points -->
+            <g>
+              <circle class="mrr-pt" cx="50" cy="165" r="2.5"/>
+              <circle class="mrr-pt" cx="98" cy="144" r="2.5"/>
+              <circle class="mrr-pt" cx="146" cy="122" r="2.5"/>
+              <circle class="mrr-pt" cx="195" cy="100" r="2.5"/>
+              <circle class="mrr-pt" cx="243" cy="82" r="2.5"/>
+              <circle class="mrr-pt" cx="291" cy="63" r="2.5"/>
+              <circle class="mrr-pt" cx="339" cy="42" r="2.5"/>
+              <circle class="mrr-pt" cx="435" cy="85" r="2.5"/>
+              <circle class="mrr-pt" cx="484" cy="63" r="2.5"/>
+              <circle class="mrr-pt" cx="532" cy="42" r="2.5"/>
+              <circle class="mrr-pt" cx="580" cy="29" r="2.5"/>
+            </g>
+            <!-- dip marker + annotation -->
+            <line x1="387" y1="103" x2="387" y2="193" stroke="#FB923C" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+            <circle class="dip-pt" cx="387" cy="103" r="4"/>
+            <text class="dip-annot" x="397" y="98">← churn segment identified</text>
+            <text class="dip-annot" x="397" y="110" opacity="0.6">Aug · -$20k MRR drop</text>
+          </svg>
+        </div>
+
+        <div class="heat-section">
+          <div class="heat-hd">
+            <div>
+              <div class="t" style="margin-bottom:2px">Cohort Retention · Weekly</div>
+              <div class="s">flagged: March cohort — week-4 retention 2%</div>
+            </div>
+            <div class="legend">
+              <span><i style="background:var(--green-dim);border:1px solid rgba(34,197,94,0.3)"></i>&gt;10%</span>
+              <span><i style="background:var(--yellow-dim);border:1px solid rgba(234,179,8,0.3)"></i>5–10%</span>
+              <span><i style="background:var(--red-dim);border:1px solid rgba(239,68,68,0.3)"></i>&lt;5%</span>
+            </div>
+          </div>
+          <div class="heatmap" id="heatmap"></div>
+        </div>
+
+        <div class="statbar">
+          <div class="stat"><div class="k">MRR</div><div class="v">$142,300</div></div>
+          <div class="stat"><div class="k">CHURN</div><div class="v bad">4.2%</div></div>
+          <div class="stat"><div class="k">NRR</div><div class="v good">112%</div></div>
+          <div class="stat"><div class="k">ACTIVE USERS</div><div class="v">40,231</div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ 03 ═══════ -->
+  <section class="project">
+    <div class="proj-head">
+      <span class="proj-num">03</span>
+      <span class="proj-title">Encrypted Vault</span>
+      <span class="proj-path">~/vault_client/</span>
+    </div>
+    <p class="outcome"><span class="n">80+</span> attorneys. Zero breaches in <span class="n">18</span> months. Passed independent security audit.</p>
+    <p class="work">Desktop app with <span class="hl">client-side AES-256-GCM</span> encryption. Keys never touch the server. Zero-knowledge architecture — even if the database is compromised, documents stay encrypted. Audit found zero critical vulnerabilities.</p>
+    <div class="stack">
+      <span class="lbl">stack:</span>
+      <span class="item">Python</span><span class="item">cryptography</span><span class="item">Electron</span><span class="item">SQLite</span>
+    </div>
+
+    <div class="demo">
+      <div class="demo-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="dtitle">vault_cli — encrypt/decrypt</span>
+        <span class="tag">demo · XOR + base64 (not production AES)</span>
+      </div>
+      <div class="demo-body">
+        <div class="vault-badge"><i></i>AES-256-GCM · client-side · zero-knowledge</div>
+
+        <div class="enc-grid">
+          <div class="enc-col">
+            <div class="clab">PLAINTEXT INPUT</div>
+            <input type="text" class="enc-input" id="enc-input" placeholder="Type something to encrypt..." value="client brief — Q4 settlement">
+          </div>
+          <div class="enc-col">
+            <div class="clab">CIPHERTEXT OUTPUT</div>
+            <div class="enc-out" id="enc-output"><span class="ph">— run encrypt to see hex output —</span></div>
+          </div>
+        </div>
+
+        <div class="enc-actions">
+          <button class="btn primary" onclick="doEncrypt()">encrypt →</button>
+          <button class="btn" onclick="doDecrypt()">← decrypt</button>
+          <span class="enc-status" id="enc-status">awaiting input</span>
+        </div>
+
+        <div class="filelist-hd">VAULT · 5 files indexed</div>
+        <div class="filelist">
+          <div class="frow">
+            <span class="lk"><svg width="11" height="12" viewBox="0 0 11 12" fill="none"><rect x="1" y="5" width="9" height="6" rx="1" stroke="#38BDF8" stroke-width="1"/><path d="M3 5V3.5a2.5 2.5 0 015 0V5" stroke="#38BDF8" stroke-width="1"/></svg></span>
+            <span class="fn">client_brief_q4.pdf</span>
+            <span class="fs">2.4 MB</span>
+            <span class="fd">encrypted · 2d ago</span>
+          </div>
+          <div class="frow">
+            <span class="lk"><svg width="11" height="12" viewBox="0 0 11 12" fill="none"><rect x="1" y="5" width="9" height="6" rx="1" stroke="#38BDF8" stroke-width="1"/><path d="M3 5V3.5a2.5 2.5 0 015 0V5" stroke="#38BDF8" stroke-width="1"/></svg></span>
+            <span class="fn">contract_v3.docx</span>
+            <span class="fs">890 KB</span>
+            <span class="fd">encrypted · 5d ago</span>
+          </div>
+          <div class="frow">
+            <span class="lk"><svg width="11" height="12" viewBox="0 0 11 12" fill="none"><rect x="1" y="5" width="9" height="6" rx="1" stroke="#38BDF8" stroke-width="1"/><path d="M3 5V3.5a2.5 2.5 0 015 0V5" stroke="#38BDF8" stroke-width="1"/></svg></span>
+            <span class="fn">settlement_2024.xlsx</span>
+            <span class="fs">1.1 MB</span>
+            <span class="fd">encrypted · 1w ago</span>
+          </div>
+          <div class="frow">
+            <span class="lk"><svg width="11" height="12" viewBox="0 0 11 12" fill="none"><rect x="1" y="5" width="9" height="6" rx="1" stroke="#38BDF8" stroke-width="1"/><path d="M3 5V3.5a2.5 2.5 0 015 0V5" stroke="#38BDF8" stroke-width="1"/></svg></span>
+            <span class="fn">discovery_photos.zip</span>
+            <span class="fs">48.2 MB</span>
+            <span class="fd">encrypted · 2w ago</span>
+          </div>
+          <div class="frow">
+            <span class="lk"><svg width="11" height="12" viewBox="0 0 11 12" fill="none"><rect x="1" y="5" width="9" height="6" rx="1" stroke="#38BDF8" stroke-width="1"/><path d="M3 5V3.5a2.5 2.5 0 015 0V5" stroke="#38BDF8" stroke-width="1"/></svg></span>
+            <span class="fn">nda_acme_2024.pdf</span>
+            <span class="fs">312 KB</span>
+            <span class="fd">encrypted · 3w ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ 04 ═══════ -->
+  <section class="project">
+    <div class="proj-head">
+      <span class="proj-num">04</span>
+      <span class="proj-title">Brand System</span>
+      <span class="proj-path">~/aurora_identity/</span>
+    </div>
+    <p class="outcome"><span class="n">$4.2M</span> seed round closed using this identity system.</p>
+    <p class="work">Full brand system for a climate tech startup — logo, color, type, icons, <span class="hl">24-page guidelines</span>. Delivered in 6 days. The pitch deck used this system. Investors saw it before the product.</p>
+    <div class="stack">
+      <span class="lbl">stack:</span>
+      <span class="item">Figma</span><span class="item">Illustrator</span><span class="item">Variable Fonts</span>
+    </div>
+
+    <div class="demo">
+      <div class="demo-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="dtitle">aurora_brand_v3.fig</span>
+        <span class="tag">24-page guidelines · 6 day delivery</span>
+      </div>
+      <div class="demo-body">
+
+        <div class="brand-section-hd">LOGO SYSTEM · 3 LOCKUPS</div>
+        <div class="logo-row">
+          <div class="logo-cell">
+            <div class="lsvg">
+              <svg viewBox="0 0 100 100" width="100" height="100">
+                <ellipse cx="42" cy="50" rx="20" ry="33" transform="rotate(-18 42 50)" fill="#38BDF8"/>
+                <ellipse cx="58" cy="50" rx="20" ry="33" transform="rotate(18 58 50)" fill="#FB923C" opacity="0.88"/>
+              </svg>
+            </div>
+            <div class="llab">PRIMARY MARK</div>
+          </div>
+          <div class="logo-cell">
+            <div class="lsvg">
+              <svg viewBox="0 0 200 60" width="170" height="51">
+                <text x="0" y="44" font-family="Inter,sans-serif" font-weight="600" font-size="38" fill="#F4F4F5" letter-spacing="-1">Aurora</text>
+                <circle cx="180" cy="42" r="4" fill="#FB923C"/>
+              </svg>
+            </div>
+            <div class="llab">WORDMARK</div>
+          </div>
+          <div class="logo-cell">
+            <div class="lsvg">
+              <svg viewBox="0 0 100 100" width="76" height="76">
+                <rect x="2" y="2" width="96" height="96" rx="22" fill="#0D2818" stroke="#27272A" stroke-width="1"/>
+                <ellipse cx="42" cy="50" rx="15" ry="25" transform="rotate(-18 42 50)" fill="#38BDF8"/>
+                <ellipse cx="58" cy="50" rx="15" ry="25" transform="rotate(18 58 50)" fill="#FB923C" opacity="0.88"/>
+              </svg>
+            </div>
+            <div class="llab">APP ICON</div>
+          </div>
+        </div>
+
+        <div class="brand-section-hd">COLOR PALETTE · 4 CORE</div>
+        <div class="color-row">
+          <div class="swatch"><div class="schip" style="background:#0D2818"></div><div class="smeta"><div class="hx">#0D2818</div><div class="nm">forest base</div></div></div>
+          <div class="swatch"><div class="schip" style="background:#38BDF8"></div><div class="smeta"><div class="hx">#38BDF8</div><div class="nm">aurora sky</div></div></div>
+          <div class="swatch"><div class="schip" style="background:#FB923C"></div><div class="smeta"><div class="hx">#FB923C</div><div class="nm">signal flare</div></div></div>
+          <div class="swatch"><div class="schip" style="background:#F4F4F5"></div><div class="smeta"><div class="hx">#F4F4F5</div><div class="nm">paper white</div></div></div>
+        </div>
+
+        <div class="brand-section-hd">TYPE SPECIMEN · INTER VARIABLE</div>
+        <div class="type-spec">
+          <div class="spec-cell">
+            <div class="gl w4">Aa</div>
+            <div class="gmeta"><div class="gn">Inter</div><div class="gw">weight 400 · regular</div></div>
+          </div>
+          <div class="spec-cell">
+            <div class="gl w7">Aa</div>
+            <div class="gmeta"><div class="gn">Inter</div><div class="gw">weight 700 · bold</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ 05 ═══════ -->
+  <section class="project">
+    <div class="proj-head">
+      <span class="proj-num">05</span>
+      <span class="proj-title">Real Estate Intelligence</span>
+      <span class="proj-path">~/rei_scraper/</span>
+    </div>
+    <p class="outcome">Found <span class="n">$2.8M</span> in below-market properties in <span class="n">6</span> months. <span class="n">3-second</span> alert latency.</p>
+    <p class="work">Concurrent scraper monitoring <span class="hl">15 real estate sites</span>. ML-based price prediction flags properties listed below market value. Sends instant Telegram alerts with property details, comparable sales, and estimated margin. Processes 50,000+ listings per day.</p>
+    <div class="stack">
+      <span class="lbl">stack:</span>
+      <span class="item">Python</span><span class="item">BeautifulSoup</span><span class="item">scikit-learn</span><span class="item">Telegram API</span>
+    </div>
+
+    <div class="demo">
+      <div class="demo-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="dtitle">rei_monitor — live feed</span>
+        <span class="tag">52,847 listings scanned today</span>
+      </div>
+      <div class="demo-body">
+        <div class="re-grid">
+          <div class="listings">
+
+            <div class="listing">
+              <div class="ltop"><span class="alert"><i></i>ALERT</span><span class="ts">2 min ago</span></div>
+              <div class="addr">2847 Marshall St, Denver CO</div>
+              <div class="price-row"><span class="price">$385,000</span><span class="below">↓ 12% below market</span></div>
+              <div class="specs">3bd · 2ba · 1,840sqft · est. margin $46k</div>
+              <div class="spark">
+                <svg viewBox="0 0 200 22" preserveAspectRatio="none">
+                  <polyline points="0,16 18,14 36,15 54,12 72,13 90,9 108,11 126,6 144,8 162,4 180,5 200,3" fill="none" stroke="#38BDF8" stroke-width="1.4" stroke-linejoin="round"/>
+                  <circle cx="200" cy="3" r="2.2" fill="#FB923C"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="listing">
+              <div class="ltop"><span class="alert"><i></i>ALERT</span><span class="ts">14 min ago</span></div>
+              <div class="addr">112 Birch Ave, Boulder CO</div>
+              <div class="price-row"><span class="price">$298,500</span><span class="below">↓ 8% below market</span></div>
+              <div class="specs">2bd · 1ba · 1,120sqft · est. margin $24k</div>
+              <div class="spark">
+                <svg viewBox="0 0 200 22" preserveAspectRatio="none">
+                  <polyline points="0,12 18,13 36,11 54,14 72,12 90,15 108,13 126,16 144,14 162,17 180,15 200,18" fill="none" stroke="#38BDF8" stroke-width="1.4" stroke-linejoin="round"/>
+                  <circle cx="200" cy="18" r="2.2" fill="#FB923C"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="listing">
+              <div class="ltop"><span class="alert"><i></i>ALERT</span><span class="ts">37 min ago</span></div>
+              <div class="addr">9240 Logan Ct, Aurora CO</div>
+              <div class="price-row"><span class="price">$612,000</span><span class="below">↓ 15% below market</span></div>
+              <div class="specs">4bd · 3ba · 2,640sqft · est. margin $91k</div>
+              <div class="spark">
+                <svg viewBox="0 0 200 22" preserveAspectRatio="none">
+                  <polyline points="0,14 18,12 36,13 54,10 72,11 90,8 108,10 126,6 144,8 162,5 180,7 200,2" fill="none" stroke="#38BDF8" stroke-width="1.4" stroke-linejoin="round"/>
+                  <circle cx="200" cy="2" r="2.2" fill="#FB923C"/>
+                </svg>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="alerts-side">
+            <div class="ashd"><span>ALERTS · 24H</span><span class="cnt">17</span></div>
+            <div class="aitem">
+              <div class="atop"><span>14:32</span><span>Denver CO</span></div>
+              <div class="aaddr">2847 Marshall St</div>
+              <div class="adrop">↓ 12% · $46k margin</div>
+            </div>
+            <div class="aitem">
+              <div class="atop"><span>14:18</span><span>Boulder CO</span></div>
+              <div class="aaddr">112 Birch Ave</div>
+              <div class="adrop">↓ 8% · $24k margin</div>
+            </div>
+            <div class="aitem">
+              <div class="atop"><span>13:55</span><span>Aurora CO</span></div>
+              <div class="aaddr">9240 Logan Ct</div>
+              <div class="adrop">↓ 15% · $91k margin</div>
+            </div>
+            <div class="aitem">
+              <div class="atop"><span>13:41</span><span>Fort Collins</span></div>
+              <div class="aaddr">551 Crystal Dr</div>
+              <div class="adrop">↓ 6% · $19k margin</div>
+            </div>
+            <div class="aitem">
+              <div class="atop"><span>13:20</span><span>Denver CO</span></div>
+              <div class="aaddr">1180 Pearl St</div>
+              <div class="adrop">↓ 11% · $38k margin</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="site">
+  <div class="line"></div>
+  <div class="yr">2021—2025</div>
+</footer>
+
+<script>
+  // ── blink cursor is pure CSS, nothing here needed ──
+
+  // ── cohort retention heatmap ──
+  // rows = cohorts (Jan..Jun), cols = weeks 1..4
+  // Mar cohort is the flagged churn segment (low retention)
+  const heat = [
+    { c:'JAN', v:[100,18,11,8] },
+    { c:'FEB', v:[100,22,14,10] },
+    { c:'MAR', v:[100,8,4,2], flag:true },
+    { c:'APR', v:[100,21,13,9] },
+    { c:'MAY', v:[100,24,16,11] },
+    { c:'JUN', v:[100,25,17,12] },
+  ];
+  function cellClass(p){
+    if(p>=100) return 'c-base';
+    if(p>10) return 'c-green';
+    if(p>=5) return 'c-yellow';
+    return 'c-red';
+  }
+  (function buildHeat(){
+    const el = document.getElementById('heatmap');
+    let html = '<div class="hcell hrow"></div>';
+    ['W1','W2','W3','W4'].forEach(w=> html += '<div class="hcell hcol">'+w+'</div>');
+    heat.forEach(row=>{
+      html += '<div class="hcell hrow">'+row.c+'</div>';
+      row.v.forEach(p=>{
+        const cls = cellClass(p);
+        const flag = row.flag ? ' c-flag' : '';
+        html += '<div class="hcell '+cls+flag+'">'+p+'%</div>';
+      });
+    });
+    el.innerHTML = html;
+  })();
+
+  // ── vault: working XOR cipher over UTF-8 bytes (symmetric, reversible) ──
+  // NOTE: demo only. Production uses AES-256-GCM. XOR shown for transparency.
+  const VAULT_KEY = 'MH-VAULT-2025-KEY';
+  const enc = new TextEncoder();
+  const dec = new TextDecoder();
+  let currentHex = '';
+
+  function keyBytes(){ return enc.encode(VAULT_KEY); }
+  function xorWith(bytes, k){
+    const out = new Uint8Array(bytes.length);
+    for(let i=0;i<bytes.length;i++) out[i] = bytes[i] ^ k[i % k.length];
+    return out;
+  }
+  function bytesToHex(bytes){
+    let h = '';
+    for(let i=0;i<bytes.length;i++) h += bytes[i].toString(16).padStart(2,'0');
+    return h;
+  }
+  function hexToBytes(h){
+    const out = new Uint8Array(h.length/2);
+    for(let i=0;i<h.length;i+=2) out[i/2] = parseInt(h.slice(i,i+2),16);
+    return out;
+  }
+
+  function doEncrypt(){
+    const v = document.getElementById('enc-input').value;
+    const out = document.getElementById('enc-output');
+    const st = document.getElementById('enc-status');
+    if(!v){ st.textContent='no input'; st.classList.remove('ok'); return; }
+    try{
+      const cipher = xorWith(enc.encode(v), keyBytes());
+      currentHex = bytesToHex(cipher);
+      out.textContent = currentHex;
+      st.textContent = 'encrypted · '+cipher.length+' bytes · key applied';
+      st.classList.add('ok');
+    }catch(e){ st.textContent='error: '+e.message; st.classList.remove('ok'); }
+  }
+  function doDecrypt(){
+    const out = document.getElementById('enc-output');
+    const st = document.getElementById('enc-status');
+    if(!currentHex){ st.textContent='nothing to decrypt — encrypt first'; st.classList.remove('ok'); return; }
+    try{
+      const plain = dec.decode(xorWith(hexToBytes(currentHex), keyBytes()));
+      out.textContent = plain;
+      st.textContent = 'decrypted · plaintext verified · match ✓';
+      st.classList.add('ok');
+    }catch(e){ st.textContent='error: '+e.message; st.classList.remove('ok'); }
+  }
+
+  // keyboard: enter in input triggers encrypt
+  document.getElementById('enc-input').addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ e.preventDefault(); doEncrypt(); }
+  });
+
+  // auto-run once on load so output isn't empty
+  window.addEventListener('DOMContentLoaded', doEncrypt);
+</script>
+
+</body>
+</html>
