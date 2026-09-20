@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MH. — YouTube Thumbnail Designer + Branding Specialist | Measurable CTR & Funding Results</title>
+<meta name="description" content="I design the packaging that turns views into revenue. High-CTR YouTube thumbnails, complete brand systems, and video editing pipelines. Work that has moved CTRs from 1–3% into the 6–10% range and powered $4.2M raises.">
+<meta name="theme-color" content="#050505">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#050505',
+          surface: '#0F0F0F',
+          paper: '#ECECEC',
+          muted: '#666',
+          accent: '#00F0FF',
+          flame: '#FF4D00',
+          line: '#1A1A1A',
+          live: '#00FF88',
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #00F0FF; color: #050505; }
+
+  /* Fade-in on scroll */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* CTR / retention bar fills */
+  .ctr-fill { transition: width 1s cubic-bezier(.2,.8,.2,1); }
+
+  /* Thumbnail text realism */
+  .thumb-text { text-shadow: 0 2px 10px rgba(0,0,0,.9), 0 0 2px rgba(0,0,0,.9); letter-spacing: -0.01em; }
+
+  /* Card hover lift */
+  .lift { transition: border-color .25s ease, transform .25s ease; }
+  .lift:hover { border-color: #00F0FF; transform: translateY(-2px); }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #050505; }
+  ::-webkit-scrollbar-thumb { background: #1A1A1A; border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .ctr-fill { transition: none !important; }
+    .lift { transition: none !important; }
+    * { animation: none !important; }
+  }
+</style>
+</head>
+<body class="bg-ink text-paper antialiased">
+
+<!-- ============ NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50 bg-ink/80 backdrop-blur-md border-b border-line">
+  <nav class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <a href="#top" class="font-black text-xl tracking-tight text-paper">MH.</a>
+    <div class="hidden md:flex items-center gap-9 text-sm font-medium text-paper/80">
+      <a href="#work" class="hover:text-accent transition-colors">Work</a>
+      <a href="#services" class="hover:text-accent transition-colors">Services</a>
+      <a href="#process" class="hover:text-accent transition-colors">Process</a>
+      <a href="#about" class="hover:text-accent transition-colors">About</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="#contact" class="hidden sm:inline-flex items-center bg-accent text-ink font-semibold text-sm px-4 py-2 rounded-full hover:bg-paper transition-colors">Hire me →</a>
+      <button id="burger" aria-label="Open menu" class="md:hidden inline-flex flex-col gap-1.5 p-2 -mr-2">
+        <span class="block w-6 h-0.5 bg-paper"></span>
+        <span class="block w-6 h-0.5 bg-paper"></span>
+        <span class="block w-6 h-0.5 bg-paper"></span>
+      </button>
+    </div>
+  </nav>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-line bg-ink">
+    <div class="px-5 py-5 flex flex-col gap-4 text-lg font-medium">
+      <a href="#work" class="py-1">Work</a>
+      <a href="#services" class="py-1">Services</a>
+      <a href="#process" class="py-1">Process</a>
+      <a href="#about" class="py-1">About</a>
+      <a href="#contact" class="mt-2 inline-flex justify-center bg-accent text-ink font-semibold px-4 py-3 rounded-full">Hire me →</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="min-h-screen flex items-center pt-28 pb-16 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto w-full">
+    <div class="fade-in inline-flex items-center gap-2 border border-line rounded-full px-4 py-1.5 text-xs sm:text-sm text-paper/80">
+      <span class="inline-block w-2 h-2 rounded-full" style="background:#00FF88"></span>
+      Accepting 2 new clients this month
+    </div>
+
+    <h1 class="fade-in mt-7 font-black tracking-tight leading-[0.95] text-[2.6rem] sm:text-6xl lg:text-8xl" style="letter-spacing:-0.03em">
+      I design the packaging<br class="hidden sm:block"> that turns views into revenue.
+    </h1>
+
+    <p class="fade-in mt-7 text-base sm:text-lg text-paper/60 max-w-3xl leading-relaxed">
+      High-CTR YouTube thumbnails • Logos &amp; complete brand systems • Video editing &amp; Shorts pipelines • Visual identity that closes deals
+    </p>
+
+    <p class="fade-in mt-5 text-base max-w-3xl leading-relaxed text-paper/80">
+      Work that has moved CTRs from <span class="text-accent font-semibold">1–3%</span> into the <span class="text-accent font-semibold">6–10%</span> range, powered <span class="text-accent font-semibold">12M+</span> view runs, and shipped brand systems used in multi-million dollar raises.
+    </p>
+
+    <div class="fade-in mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
+      <a href="#contact" class="inline-flex justify-center items-center bg-accent text-ink font-bold text-base sm:text-lg px-7 py-4 rounded-full hover:bg-paper transition-colors">Hire me →</a>
+      <a href="#work" class="inline-flex justify-center items-center border border-paper/30 text-paper font-semibold text-base sm:text-lg px-7 py-4 rounded-full hover:border-accent hover:text-accent transition-colors">See work</a>
+    </div>
+
+    <!-- Trust strip -->
+    <div class="fade-in mt-16 sm:mt-24 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 border-t border-line pt-10">
+      <div>
+        <div class="font-black text-accent text-4xl sm:text-5xl tracking-tight">12M+</div>
+        <div class="mt-1 text-xs sm:text-sm text-muted uppercase tracking-wider">views</div>
+      </div>
+      <div>
+        <div class="font-black text-accent text-4xl sm:text-5xl tracking-tight">6–10%</div>
+        <div class="mt-1 text-xs sm:text-sm text-muted uppercase tracking-wider">CTR</div>
+      </div>
+      <div>
+        <div class="font-black text-accent text-4xl sm:text-5xl tracking-tight">$4.2M</div>
+        <div class="mt-1 text-xs sm:text-sm text-muted uppercase tracking-wider">raised</div>
+      </div>
+      <div>
+        <div class="font-black text-accent text-4xl sm:text-5xl tracking-tight">24h</div>
+        <div class="mt-1 text-xs sm:text-sm text-muted uppercase tracking-wider">concept</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE STUDIES ============ -->
+<section id="work" class="py-24 sm:py-32 px-5 sm:px-8 border-t border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="fade-in mb-16 sm:mb-24">
+      <div class="font-mono text-xs text-accent uppercase tracking-widest mb-4">Selected work</div>
+      <h2 class="font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-none" style="letter-spacing:-0.03em">Case studies.</h2>
+    </div>
+
+    <!-- ===== CASE 1: Fitness Shorts System ===== -->
+    <article class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center py-16 lg:py-24 border-t border-line">
+      <div class="fade-in">
+        <div class="font-mono text-xs text-accent uppercase tracking-widest">YOUTUBE • SHORTS</div>
+        <h3 class="mt-4 font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight">Fitness Shorts System</h3>
+        <p class="mt-4 text-xl font-bold leading-snug">
+          <span class="text-accent">1.1%</span> → <span class="text-accent">4.2%</span> CTR • <span class="text-accent">12M+</span> views in 90 days • <span class="text-accent">50k</span> new subs
+        </p>
+        <p class="mt-6 text-base text-muted leading-relaxed">Creator had 200k subscribers but Shorts were stuck at 1.1% CTR. Thumbnails were flat, captions were afterthoughts, no visual consistency.</p>
+        <p class="mt-4 text-base text-paper leading-relaxed">Built a full thumbnail system — face-forward, high-emotion, high-contrast compositions with 3-word max text. Kinetic caption pipeline with word-by-word reveal synced to audio peaks. Consistent color grading across every Short.</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">Photoshop</span>
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">After Effects</span>
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">FFmpeg</span>
+        </div>
+      </div>
+
+      <!-- VISUAL: 2x3 thumbnail grid + before/after bar -->
+      <div class="fade-in">
+        <div class="grid grid-cols-3 gap-2 sm:gap-3">
+          <!-- thumb 1 purple -->
+          <div class="relative aspect-video rounded-lg overflow-hidden flex items-center justify-center p-2" style="background:linear-gradient(135deg,#7c3aed,#4c1d95)">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+            <span class="thumb-text relative font-black text-white text-[10px] sm:text-sm text-center uppercase leading-tight">3 EXERCISES THAT WORK</span>
+          </div>
+          <!-- thumb 2 blue -->
+          <div class="relative aspect-video rounded-lg overflow-hidden flex items-center justify-center p-2" style="background:linear-gradient(135deg,#2563eb,#0c2461)">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+            <span class="thumb-text relative font-black text-white text-[10px] sm:text-sm text-center uppercase leading-tight">I TRIED 30 DAYS</span>
+          </div>
+          <!-- thumb 3 green -->
+          <div class="relative aspect-video rounded-lg overflow-hidden flex items-center justify-center p-2" style="background:linear-gradient(135deg,#16a34a,#0f3d1f)">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+            <span class="thumb-text relative font-black text-white text-[10px] sm:text-sm text-center uppercase leading-tight">THIS CHANGED ME</span>
+          </div>
+          <!-- thumb 4 orange -->
+          <div class="relative aspect-video rounded-lg overflow-hidden flex items-center justify-center p-2" style="background:linear-gradient(135deg,#ea580c,#7c2d12)">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+            <span class="thumb-text relative font-black text-white text-[10px] sm:text-sm text-center uppercase leading-tight">DON'T DO THIS</span>
+          </div>
+          <!-- thumb 5 red -->
+          <div class="relative aspect-video rounded-lg overflow-hidden flex items-center justify-center p-2" style="background:linear-gradient(135deg,#dc2626,#450a0a)">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+            <span class="thumb-text relative font-black text-white text-[10px] sm:text-sm text-center uppercase leading-tight">THE TRUTH</span>
+          </div>
+          <!-- thumb 6 teal -->
+          <div class="relative aspect-video rounded-lg overflow-hidden flex items-center justify-center p-2" style="background:linear-gradient(135deg,#0d9488,#042f2e)">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+            <span class="thumb-text relative font-black text-white text-[10px] sm:text-sm text-center uppercase leading-tight">RESULTS IN 7 DAYS</span>
+          </div>
+        </div>
+
+        <!-- Before/After bars -->
+        <div class="mt-6 space-y-4">
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-1.5"><span class="text-flame">BEFORE</span><span class="text-flame font-bold">1.1%</span></div>
+            <div class="h-2.5 bg-line rounded-full overflow-hidden"><div class="ctr-fill h-full bg-flame rounded-full" data-fill="22" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-1.5"><span class="text-accent">AFTER</span><span class="text-accent font-bold">4.2%</span></div>
+            <div class="h-2.5 bg-line rounded-full overflow-hidden"><div class="ctr-fill h-full bg-accent rounded-full" data-fill="84" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== CASE 2: Climate-Tech Brand System ===== -->
+    <article class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center py-16 lg:py-24 border-t border-line">
+      <div class="fade-in lg:order-2">
+        <div class="font-mono text-xs text-accent uppercase tracking-widest">BRAND • IDENTITY</div>
+        <h3 class="mt-4 font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight">Climate-Tech Brand System</h3>
+        <p class="mt-4 text-xl font-bold leading-snug">
+          <span class="text-accent">$4.2M</span> seed round closed using this identity
+        </p>
+        <p class="mt-6 text-base text-muted leading-relaxed">Pre-seed startup needed a complete identity before investor roadshow. Had a name, nothing else.</p>
+        <p class="mt-4 text-base text-paper leading-relaxed">Logo lockups (3 variants), color system, typography scale, custom icon set, 24-page brand guideline document. Delivered in 6 days.</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">Figma</span>
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">Illustrator</span>
+        </div>
+      </div>
+
+      <!-- VISUAL: brand system -->
+      <div class="fade-in lg:order-1">
+        <!-- Logo on dark card -->
+        <div class="bg-surface border border-line rounded-xl p-8 flex items-center justify-center">
+          <svg viewBox="0 0 120 120" class="w-28 h-28">
+            <polygon points="60,8 108,96 12,96" fill="#00F0FF"/>
+            <polygon points="60,112 108,24 12,24" fill="#0D2818"/>
+          </svg>
+        </div>
+        <!-- Color swatches -->
+        <div class="mt-3 grid grid-cols-4 gap-2 sm:gap-3">
+          <div class="text-center">
+            <div class="aspect-square rounded-lg border border-line" style="background:#050505"></div>
+            <div class="mt-1.5 text-[10px] font-mono text-muted">#050505</div>
+          </div>
+          <div class="text-center">
+            <div class="aspect-square rounded-lg" style="background:#00F0FF"></div>
+            <div class="mt-1.5 text-[10px] font-mono text-muted">#00F0FF</div>
+          </div>
+          <div class="text-center">
+            <div class="aspect-square rounded-lg" style="background:#0D2818"></div>
+            <div class="mt-1.5 text-[10px] font-mono text-muted">#0D2818</div>
+          </div>
+          <div class="text-center">
+            <div class="aspect-square rounded-lg" style="background:#FF4D00"></div>
+            <div class="mt-1.5 text-[10px] font-mono text-muted">#FF4D00</div>
+          </div>
+        </div>
+        <!-- Type scale Aa -->
+        <div class="mt-3 grid grid-cols-2 gap-2 sm:gap-3">
+          <div class="bg-surface border border-line rounded-lg p-4 flex items-end justify-center gap-1">
+            <span class="font-normal text-paper text-4xl leading-none">Aa</span>
+            <span class="text-[10px] font-mono text-muted mb-1">400</span>
+          </div>
+          <div class="bg-surface border border-line rounded-lg p-4 flex items-end justify-center gap-1">
+            <span class="font-black text-paper text-4xl leading-none">Aa</span>
+            <span class="text-[10px] font-mono text-muted mb-1">900</span>
+          </div>
+        </div>
+        <!-- Guideline page mock with dashed spacing guides -->
+        <div class="mt-3 bg-surface border border-line rounded-xl p-6 relative">
+          <div class="absolute inset-3 border border-dashed border-accent/40 rounded-lg pointer-events-none"></div>
+          <div class="absolute left-1/2 top-0 bottom-0 border-l border-dashed border-accent/20"></div>
+          <div class="flex items-center justify-center py-6">
+            <svg viewBox="0 0 120 120" class="w-16 h-16">
+              <polygon points="60,8 108,96 12,96" fill="#00F0FF"/>
+              <polygon points="60,112 108,24 12,24" fill="#0D2818"/>
+            </svg>
+          </div>
+          <div class="text-center text-[10px] font-mono text-muted tracking-widest uppercase">Clear space — guideline p.04</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== CASE 3: Finance Channel Overhaul ===== -->
+    <article class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center py-16 lg:py-24 border-t border-line">
+      <div class="fade-in">
+        <div class="font-mono text-xs text-accent uppercase tracking-widest">YOUTUBE • THUMBNAILS</div>
+        <h3 class="mt-4 font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight">Finance Channel Overhaul</h3>
+        <p class="mt-4 text-xl font-bold leading-snug">
+          <span class="text-accent">2.8%</span> → <span class="text-accent">8.4%</span> CTR • <span class="text-accent">3</span> videos crossed <span class="text-accent">1M</span> views
+        </p>
+        <p class="mt-6 text-base text-muted leading-relaxed">Technical finance content stuck at 2.8% CTR. Thumbnails were text-heavy, low-contrast, no emotional pull.</p>
+        <p class="mt-4 text-base text-paper leading-relaxed">Accessible, high-contrast, emotion-driven packaging. Face-forward compositions with directional eye-lines. 2-color maximum per thumbnail. Consistent series template.</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">Photoshop</span>
+        </div>
+      </div>
+
+      <!-- VISUAL: before/after -->
+      <div class="fade-in">
+        <div class="grid grid-cols-2 gap-3">
+          <!-- BEFORE -->
+          <div>
+            <div class="text-flame text-xs font-mono mb-2 uppercase tracking-widest">Before</div>
+            <div class="relative aspect-video rounded-lg overflow-hidden bg-neutral-800 flex items-center justify-center p-2">
+              <span class="text-neutral-500 text-[10px] sm:text-xs text-center leading-snug">Understanding Compound Interest</span>
+            </div>
+          </div>
+          <!-- AFTER -->
+          <div>
+            <div class="text-accent text-xs font-mono mb-2 uppercase tracking-widest">After</div>
+            <div class="relative aspect-video rounded-lg overflow-hidden flex items-center p-2" style="background:linear-gradient(120deg,#0c2461,#050505)">
+              <div class="flex items-center w-full gap-1">
+                <div class="flex flex-col items-center">
+                  <!-- face silhouette -->
+                  <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-paper"></div>
+                  <div class="w-10 h-4 sm:w-12 sm:h-5 bg-paper" style="clip-path:polygon(0 0,100% 0,80% 100%,20% 100%)"></div>
+                </div>
+                <span class="thumb-text font-black text-white text-sm sm:text-2xl uppercase leading-none">COMPOUND<br>INTEREST</span>
+                <!-- orange arrow pointing at face -->
+                <svg class="w-5 h-5 sm:w-7 sm:h-7 text-flame shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M2 12h12m0 0l-5-5m5 5l-5 5"/></svg>
+              </div>
+              <div class="absolute left-2 right-2 bottom-1.5 h-1 bg-accent rounded-full"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bar chart 2.8% vs 8.4% -->
+        <div class="mt-6 bg-surface border border-line rounded-xl p-5">
+          <div class="flex justify-between items-end mb-3">
+            <span class="text-xs font-mono text-muted uppercase tracking-widest">CTR lift</span>
+            <span class="text-sm font-bold"><span class="text-flame">2.8%</span> <span class="text-muted">→</span> <span class="text-accent">8.4%</span></span>
+          </div>
+          <div class="flex items-end gap-4 h-28">
+            <div class="flex-1 flex flex-col items-center justify-end h-full">
+              <div class="w-full max-w-[60px] bg-flame rounded-t-md ctr-fill" data-fill="33" style="height:0%"></div>
+              <span class="mt-2 text-[10px] font-mono text-flame">2.8%</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center justify-end h-full">
+              <div class="w-full max-w-[60px] bg-accent rounded-t-md ctr-fill" data-fill="100" style="height:0%"></div>
+              <span class="mt-2 text-[10px] font-mono text-accent">8.4%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== CASE 4: SaaS Platform Identity ===== -->
+    <article class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center py-16 lg:py-24 border-t border-line">
+      <div class="fade-in lg:order-2">
+        <div class="font-mono text-xs text-accent uppercase tracking-widest">LOGO • IDENTITY</div>
+        <h3 class="mt-4 font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight">SaaS Platform Identity</h3>
+        <p class="mt-4 text-xl font-bold leading-snug">
+          Professional identity deployed across <span class="text-accent">12</span> touchpoints
+        </p>
+        <p class="mt-6 text-base text-muted leading-relaxed">Product looked like a side project. Investors couldn't take it seriously.</p>
+        <p class="mt-4 text-base text-paper leading-relaxed">Clean, scalable logo system with app icon, web header, social avatars, pitch deck template. Full color + mono versions. Usage guidelines.</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">Figma</span>
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">Illustrator</span>
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">SVG</span>
+        </div>
+      </div>
+
+      <!-- VISUAL: 3 logos + touchpoints -->
+      <div class="fade-in lg:order-1">
+        <div class="grid grid-cols-3 gap-3">
+          <!-- App icon -->
+          <div class="bg-surface border border-line rounded-xl aspect-square flex items-center justify-center p-4">
+            <div class="w-full aspect-square rounded-xl bg-ink border border-line flex items-center justify-center">
+              <svg viewBox="0 0 100 100" class="w-3/5">
+                <circle cx="40" cy="50" r="22" fill="none" stroke="#00F0FF" stroke-width="9"/>
+                <circle cx="60" cy="50" r="22" fill="none" stroke="#00F0FF" stroke-width="9"/>
+              </svg>
+            </div>
+          </div>
+          <!-- Wordmark color -->
+          <div class="bg-surface border border-line rounded-xl aspect-square flex items-center justify-center p-4">
+            <span class="font-bold text-xl sm:text-2xl text-paper tracking-tight">Aurora<span class="text-accent">.</span></span>
+          </div>
+          <!-- Wordmark mono -->
+          <div class="bg-surface border border-line rounded-xl aspect-square flex items-center justify-center p-4">
+            <span class="font-bold text-xl sm:text-2xl text-paper tracking-tight">Aurora.</span>
+          </div>
+        </div>
+
+        <!-- 12 touchpoints -->
+        <div class="mt-3 bg-surface border border-line rounded-xl p-5">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-muted uppercase tracking-widest">Touchpoints</span>
+            <span class="text-sm font-bold text-accent">12 TOUCHPOINTS</span>
+          </div>
+          <div class="grid grid-cols-6 gap-3">
+            <!-- app -->
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="w-8 h-8 rounded-lg border border-paper/40"></div>
+              <span class="text-[9px] font-mono text-muted">app</span>
+            </div>
+            <!-- web -->
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="w-8 h-8 rounded-md border border-paper/40 overflow-hidden flex flex-col">
+                <div class="h-2 bg-paper/30"></div>
+                <div class="flex-1 m-1 rounded-sm border border-paper/20"></div>
+              </div>
+              <span class="text-[9px] font-mono text-muted">web</span>
+            </div>
+            <!-- deck -->
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="relative w-8 h-8">
+                <div class="absolute inset-0 rounded-sm border border-paper/40 bg-surface translate-x-1 translate-y-1"></div>
+                <div class="absolute inset-0 rounded-sm border border-paper/40 bg-surface"></div>
+              </div>
+              <span class="text-[9px] font-mono text-muted">deck</span>
+            </div>
+            <!-- social -->
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="w-8 h-8 rounded-full border border-paper/40"></div>
+              <span class="text-[9px] font-mono text-muted">social</span>
+            </div>
+            <!-- email -->
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="w-8 h-8 rounded-md border border-paper/40 relative overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-full h-px bg-paper/40 rotate-[-20deg]"></div>
+                </div>
+              </div>
+              <span class="text-[9px] font-mono text-muted">email</span>
+            </div>
+            <!-- print -->
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="w-7 h-9 rounded-sm border border-paper/40 bg-surface relative">
+                <div class="absolute top-1.5 left-1 right-1 h-px bg-paper/30"></div>
+                <div class="absolute top-3 left-1 right-2 h-px bg-paper/30"></div>
+                <div class="absolute top-5 left-1 right-3 h-px bg-paper/30"></div>
+              </div>
+              <span class="text-[9px] font-mono text-muted">print</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== CASE 5: Editing + Shorts Pipeline ===== -->
+    <article class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center py-16 lg:py-24 border-t border-line border-b">
+      <div class="fade-in">
+        <div class="font-mono text-xs text-accent uppercase tracking-widest">VIDEO • MOTION</div>
+        <h3 class="mt-4 font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight">Editing + Shorts Pipeline</h3>
+        <p class="mt-4 text-xl font-bold leading-snug">
+          <span class="text-accent">38%</span> → <span class="text-accent">52%</span> retention • <span class="text-accent">37%</span> engagement lift • <span class="text-accent">8–12</span> Shorts per video
+        </p>
+        <p class="mt-6 text-base text-muted leading-relaxed">Long-form videos had 38% average retention. Shorts had no captions, no hook optimization.</p>
+        <p class="mt-4 text-base text-paper leading-relaxed">Full editing package — pacing, cuts, motion graphics, kinetic captions, platform-specific exports. Built a Shorts pipeline that turns 1 long video into 8-12 vertical clips.</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">Premiere Pro</span>
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">After Effects</span>
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">FFmpeg</span>
+          <span class="text-xs font-mono px-3 py-1.5 rounded-full border border-line text-paper/70">Whisper</span>
+        </div>
+      </div>
+
+      <!-- VISUAL: timeline + clips + retention -->
+      <div class="fade-in">
+        <!-- Timeline -->
+        <div class="bg-surface border border-line rounded-xl p-4">
+          <div class="flex justify-between text-[10px] font-mono text-muted uppercase tracking-widest mb-2">
+            <span>20-min video</span><span>10 slices</span>
+          </div>
+          <div class="relative h-[60px] rounded-md overflow-hidden bg-ink border border-line">
+            <div class="absolute inset-0 flex items-center px-3">
+              <div class="w-full h-8 rounded-sm" style="background:repeating-linear-gradient(90deg,#1A1A1A 0,#1A1A1A 6px,#0F0F0F 6px,#0F0F0F 12px)"></div>
+            </div>
+            <!-- 10 vertical slice lines -->
+            <div class="absolute top-0 bottom-0 w-px bg-accent/70" style="left:10%"></div>
+            <div class="absolute top-0 bottom-0 w-px bg-accent/70" style="left:20%"></div>
+            <div class="absolute top-0 bottom-0 w-px bg-accent/70" style="left:30%"></div>
+            <div class="absolute top-0 bottom-0 w-px bg-accent/70" style="left:40%"></div>
+            <div class="absolute top-0 bottom-0 w-px bg-accent/70" style="left:50%"></div>
+            <div class="absolute top-0 bottom-0 w-px bg-accent/70" style="left:60%"></div>
+            <div class="absolute top-0 bottom-0 w-px bg-accent/70" style="left:70%"></div>
+            <div class="absolute top-0 bottom-0 w-px bg-accent/70" style="left:80%"></div>
+            <div class="absolute top-0 bottom-0 w-px bg-accent/70" style="left:90%"></div>
+          </div>
+        </div>
+
+        <!-- 5x2 clip grid -->
+        <div class="mt-3 grid grid-cols-5 gap-2">
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#1e3a8a,#050505)"><span class="text-[8px] font-mono text-accent">HOOK</span></div>
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#7c2d12,#050505)"><span class="text-[8px] font-mono text-accent">TIP 1</span></div>
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#4c1d95,#050505)"><span class="text-[8px] font-mono text-accent">TIP 2</span></div>
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#0f3d1f,#050505)"><span class="text-[8px] font-mono text-accent">RESULT</span></div>
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#831843,#050505)"><span class="text-[8px] font-mono text-accent">CTA</span></div>
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#0c2461,#050505)"><span class="text-[8px] font-mono text-accent">TIP 3</span></div>
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#042f2e,#050505)"><span class="text-[8px] font-mono text-accent">TIP 4</span></div>
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#450a0a,#050505)"><span class="text-[8px] font-mono text-accent">MISTAKE</span></div>
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#365314,#050505)"><span class="text-[8px] font-mono text-accent">PROOF</span></div>
+          <div class="relative aspect-[9/16] rounded-md overflow-hidden flex items-end p-1" style="background:linear-gradient(160deg,#155e75,#050505)"><span class="text-[8px] font-mono text-accent">END</span></div>
+        </div>
+        <div class="mt-2 text-center text-xs font-mono text-muted uppercase tracking-widest">10 clips from 1 video</div>
+
+        <!-- Retention bars -->
+        <div class="mt-5 space-y-3">
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-1.5"><span class="text-flame">BEFORE</span><span class="text-flame font-bold">38%</span></div>
+            <div class="h-2.5 bg-line rounded-full overflow-hidden"><div class="ctr-fill h-full bg-flame rounded-full" data-fill="38" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-1.5"><span class="text-accent">AFTER</span><span class="text-accent font-bold">52%</span></div>
+            <div class="h-2.5 bg-line rounded-full overflow-hidden"><div class="ctr-fill h-full bg-accent rounded-full" data-fill="52" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="py-24 sm:py-32 px-5 sm:px-8 border-t border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="fade-in mb-14 sm:mb-20">
+      <div class="font-mono text-xs text-accent uppercase tracking-widest mb-4">What I do</div>
+      <h2 class="font-black text-5xl sm:text-7xl lg:text-[72px] tracking-tight leading-none" style="letter-spacing:-0.03em">Services</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+      <div class="fade-in lift bg-surface border border-line rounded-xl p-8 flex flex-col">
+        <h3 class="font-bold text-xl">YouTube Thumbnail Systems</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed flex-1">High-CTR thumbnail design + template system. Consistent series packaging.</p>
+        <div class="mt-6 text-accent font-bold text-lg">from $150</div>
+      </div>
+      <div class="fade-in lift bg-surface border border-line rounded-xl p-8 flex flex-col">
+        <h3 class="font-bold text-xl">Logo Design</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed flex-1">Logo lockups, color, type. Everything you need to look professional.</p>
+        <div class="mt-6 text-accent font-bold text-lg">from $300</div>
+      </div>
+      <div class="fade-in lift bg-surface border border-line rounded-xl p-8 flex flex-col">
+        <h3 class="font-bold text-xl">Full Brand System + Guidelines</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed flex-1">Complete 20+ page guideline document. Logo, color, type, applications, dos/don'ts.</p>
+        <div class="mt-6 text-accent font-bold text-lg">from $1,200</div>
+      </div>
+      <div class="fade-in lift bg-surface border border-line rounded-xl p-8 flex flex-col">
+        <h3 class="font-bold text-xl">Video Editing &amp; Shorts Pipelines</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed flex-1">Long-form editing + Shorts pipeline. Captions, motion, platform exports.</p>
+        <div class="mt-6 text-accent font-bold text-lg">from $400 / package</div>
+      </div>
+      <div class="fade-in lift bg-surface border border-line rounded-xl p-8 flex flex-col">
+        <h3 class="font-bold text-xl">Ongoing Packaging Retainer</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed flex-1">Monthly thumbnails + Shorts + brand management. Everything handled.</p>
+        <div class="mt-6 text-accent font-bold text-lg">from $1,500/mo</div>
+      </div>
+      <!-- CTA card -->
+      <div class="fade-in lift bg-ink border border-line rounded-xl p-8 flex flex-col justify-between">
+        <div>
+          <h3 class="font-bold text-xl">Not sure what you need?</h3>
+          <p class="mt-3 text-sm text-muted leading-relaxed">Tell me your goal. I'll scope the right package.</p>
+        </div>
+        <a href="#contact" class="mt-6 inline-flex items-center justify-center bg-accent text-ink font-semibold px-5 py-3 rounded-full hover:bg-paper transition-colors">Start a project →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="process" class="py-24 sm:py-32 px-5 sm:px-8 border-t border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="fade-in mb-14 sm:mb-20">
+      <div class="font-mono text-xs text-accent uppercase tracking-widest mb-4">How it works</div>
+      <h2 class="font-black text-5xl sm:text-7xl tracking-tight leading-none" style="letter-spacing:-0.03em">How it works</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-line border border-line rounded-xl overflow-hidden">
+      <div class="fade-in bg-surface p-8">
+        <div class="font-mono text-accent text-sm">01</div>
+        <h3 class="mt-4 font-bold text-2xl">Brief</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">Send me what you need. Links, references, goals.</p>
+      </div>
+      <div class="fade-in bg-surface p-8">
+        <div class="font-mono text-accent text-sm">02</div>
+        <h3 class="mt-4 font-bold text-2xl">Concept</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">Within 24h, I deliver concepts. You pick direction.</p>
+      </div>
+      <div class="fade-in bg-surface p-8">
+        <div class="font-mono text-accent text-sm">03</div>
+        <h3 class="mt-4 font-bold text-2xl">Produce</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">Full package delivered. Revisions until you're happy.</p>
+      </div>
+      <div class="fade-in bg-surface p-8">
+        <div class="font-mono text-accent text-sm">04</div>
+        <h3 class="mt-4 font-bold text-2xl">Ship</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">Final files + templates. You own everything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="py-24 sm:py-32 px-5 sm:px-8 border-t border-line">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 items-start">
+    <div class="fade-in lg:col-span-4">
+      <div class="font-mono text-xs text-accent uppercase tracking-widest mb-4">Who I am</div>
+      <h2 class="font-black text-5xl sm:text-7xl tracking-tight leading-none" style="letter-spacing:-0.03em">About</h2>
+    </div>
+    <div class="fade-in lg:col-span-8">
+      <p class="text-2xl sm:text-3xl font-medium leading-snug text-paper tracking-tight" style="letter-spacing:-0.01em">
+        I've spent the last 4 years designing packaging for creators and founders. Thumbnails that double CTR. Brand systems that close rounds. Video pipelines that scale. I don't do fluff — I do work that moves numbers.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="py-24 sm:py-32 px-5 sm:px-8 border-t border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="fade-in mb-14 sm:mb-20">
+      <div class="font-mono text-xs text-accent uppercase tracking-widest mb-4">Proof</div>
+      <h2 class="font-black text-5xl sm:text-7xl tracking-tight leading-none" style="letter-spacing:-0.03em">What clients say.</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4 sm:gap-5">
+      <figure class="fade-in bg-surface border border-line rounded-xl p-8 flex flex-col">
+        <blockquote class="text-lg leading-relaxed text-paper">"Our CTR went from <span class="text-accent font-semibold">1.8% to 7.2%</span> in three weeks. The thumbnail system paid for itself in the first video."</blockquote>
+        <figcaption class="mt-6 text-sm text-muted">— Creator, 500k subs</figcaption>
+      </figure>
+      <figure class="fade-in bg-surface border border-line rounded-xl p-8 flex flex-col">
+        <blockquote class="text-lg leading-relaxed text-paper">"We walked into our seed round with a brand that looked like we'd already raised Series A. Closed <span class="text-accent font-semibold">$4.2M</span>."</blockquote>
+        <figcaption class="mt-6 text-sm text-muted">— Founder, Climate-Tech</figcaption>
+      </figure>
+      <figure class="fade-in bg-surface border border-line rounded-xl p-8 flex flex-col">
+        <blockquote class="text-lg leading-relaxed text-paper">"The Shorts pipeline alone <span class="text-accent font-semibold">3x'd</span> our output. We went from 200 to 600+ clips a month."</blockquote>
+        <figcaption class="mt-6 text-sm text-muted">— Agency Owner</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="py-24 sm:py-32 px-5 sm:px-8 border-t border-line">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="fade-in inline-flex items-center gap-2 border border-line rounded-full px-4 py-1.5 text-xs sm:text-sm text-paper/80">
+      <span class="inline-block w-2 h-2 rounded-full" style="background:#00FF88"></span>
+      Accepting 2 new clients this month
+    </div>
+    <h2 class="fade-in mt-7 font-black text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.95]" style="letter-spacing:-0.03em">Let's work together</h2>
+    <a href="mailto:moneyhunterss@proton.me" class="fade-in mt-8 inline-block font-bold text-2xl sm:text-4xl text-paper hover:text-accent transition-colors break-all tracking-tight" style="letter-spacing:-0.02em">moneyhunterss@proton.me</a>
+    <div class="fade-in mt-8">
+      <a href="mailto:moneyhunterss@proton.me" class="inline-flex items-center bg-accent text-ink font-bold text-base sm:text-lg px-8 py-4 rounded-full hover:bg-paper transition-colors">Book a call →</a>
+    </div>
+    <div class="fade-in mt-10 flex flex-col sm:flex-row justify-center gap-3 sm:gap-8 text-sm text-muted">
+      <span>Average response time: <span class="text-paper">under 2 hours.</span></span>
+      <span>Proof-of-concept <span class="text-paper">within 24h.</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-line py-10 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="font-bold text-paper">MH. — Packaging that converts.</div>
+    <div class="text-sm text-muted">© 2025</div>
+  </div>
+</footer>
+
+<!-- ============ JS ============ -->
+<script>
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href');
+        if (id.length > 1) {
+          var el = document.querySelector(id);
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+            var menu = document.getElementById('mobile-menu');
+            if (menu && !menu.classList.contains('hidden')) menu.classList.add('hidden');
+          }
+        }
+      });
+    });
+
+    // Mobile menu toggle
+    var burger = document.getElementById('burger');
+    var menu = document.getElementById('mobile-menu');
+    if (burger && menu) {
+      burger.addEventListener('click', function () { menu.classList.toggle('hidden'); });
+    }
+
+    // Fade-in observer
+    var fadeEls = document.querySelectorAll('.fade-in');
+    if (reduce || !('IntersectionObserver' in window)) {
+      fadeEls.forEach(function (el) { el.classList.add('visible'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add('visible');
+            io.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      fadeEls.forEach(function (el) { io.observe(el); });
+    }
+
+    // CTR / bar fill animation (horizontal = width, vertical chart = height)
+    var fills = document.querySelectorAll('.ctr-fill');
+    function applyFill(el) {
+      var target = el.getAttribute('data-fill');
+      if (target == null) return;
+      if (el.style.height !== '' && el.style.height != null) {
+        el.style.height = target + '%';
+      } else {
+        el.style.width = target + '%';
+      }
+    }
+    if (reduce || !('IntersectionObserver' in window)) {
+      fills.forEach(applyFill);
+    } else {
+      var fio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            setTimeout(function () { applyFill(en.target); }, 120);
+            fio.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      fills.forEach(function (el) { fio.observe(el); });
+    }
+  })();
+</script>
+</body>
+</html>
